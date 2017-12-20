@@ -2,8 +2,8 @@ package com.example.hforum.controller;
 
 import com.example.hforum.model.User;
 import com.example.hforum.service.UserService;
-import com.example.hforum.utils.ResponseDataBuilder;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.example.hforum.utils.PageBean;
+import com.example.hforum.utils.ResponseDataFactory;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
 import java.util.Map;
 
 @RequestMapping("/user")
@@ -49,9 +50,11 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> list(int pageIndex, int pageSize, User user) {
 
-		PageList<User> pageList = userService.list(pageIndex,pageSize,user);
+		PageBean pageBean = ResponseDataFactory.createPageBean(pageIndex, pageSize);
 
-		return ResponseDataBuilder.buildResponseDataMap(pageList);
+		List<User> list = userService.list(user, pageBean);
+
+		return ResponseDataFactory.buildResponseDataMap(pageBean,list);
 	}
 
 	@RequestMapping(value = "/logout")

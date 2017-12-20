@@ -3,11 +3,12 @@ package com.example.hforum.service.impl;
 import com.example.hforum.mapper.UserMapper;
 import com.example.hforum.model.User;
 import com.example.hforum.service.UserService;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.example.hforum.utils.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @Service
@@ -26,9 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageList<User> list(int pageIndex, int pageSize, User user) {
-        PageBounds pageBounds = new PageBounds(pageIndex, pageSize);
-        PageList<User> list = userMapper.list(user,pageBounds);
+    public List<User> list(User user, PageBean pageBean) {
+        List<User> list = userMapper.list(user);
         return list;
     }
 

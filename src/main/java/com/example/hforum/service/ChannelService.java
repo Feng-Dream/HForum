@@ -1,8 +1,10 @@
 package com.example.hforum.service;
 
 import com.example.hforum.model.Channel;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.example.hforum.utils.PageBean;
+
+import java.util.List;
 
 public interface ChannelService {
-    public PageList<Channel> list(int pageIndex, int pageSize, Channel channel);
+    public List<Channel> list(Channel channel,PageBean pageBean);
 }

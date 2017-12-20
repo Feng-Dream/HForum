@@ -1,9 +1,9 @@
 package com.example.hforum.mapper;
 
 import com.example.hforum.model.Channel;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface ChannelMapper {
@@ -19,5 +19,5 @@ public interface ChannelMapper {
 
     int updateByPrimaryKey(Channel record);
 
-    PageList<Channel> list(Channel channel, PageBounds pageBounds);
+    List<Channel> list(Channel channel);
 }

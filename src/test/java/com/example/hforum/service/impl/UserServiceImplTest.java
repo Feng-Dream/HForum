@@ -3,6 +3,8 @@ package com.example.hforum.service.impl;
 import com.example.hforum.model.User;
 import com.example.hforum.service.UserService;
 import com.example.hforum.utils.NumberUtil;
+import com.example.hforum.utils.PageBean;
+import com.example.hforum.utils.ResponseDataFactory;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.junit.Before;
@@ -13,6 +15,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:applicationContext-dao.xml"})
@@ -42,5 +46,14 @@ private UserService userService;
           userService.add(user);
         }
         System.out.println("OK");
+    }
+    @Test
+    public void list() {
+        User user  =new User();
+        user.setUserName("测");
+        PageBean pageBean = ResponseDataFactory.createPageBean(1, 3);
+        List<User> list = userService.list(user, pageBean);
+        Map<String, Object> stringObjectMap = ResponseDataFactory.buildResponseDataMap(pageBean, list);
+        System.out.println(stringObjectMap.get("count"));
     }
 }

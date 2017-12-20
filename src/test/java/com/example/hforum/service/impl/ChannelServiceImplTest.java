@@ -2,7 +2,6 @@ package com.example.hforum.service.impl;
 
 import com.example.hforum.model.Channel;
 import com.example.hforum.service.ChannelService;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +24,10 @@ public class ChannelServiceImplTest {
     public void list() {
         //channel.setChannelName("点");
       //  PageBounds pb = new PageBounds(1, 3);
-        PageList<Channel> list = channelService.list(1,3,channel);
-        for (Channel c:list
-             ) {
-            System.out.println(c);
-        }
+//        PageList<Channel> list = channelService.list(1,3,channel);
+//        for (Channel c:list
+//             ) {
+//            System.out.println(c);
+//        }
     }
 }

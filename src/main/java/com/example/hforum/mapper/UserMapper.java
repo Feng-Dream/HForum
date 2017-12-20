@@ -1,9 +1,9 @@
 package com.example.hforum.mapper;
 
 import com.example.hforum.model.User;
-import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
-import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserMapper {
@@ -21,6 +21,5 @@ public interface UserMapper {
     
     User loadSelective(User record);
 
-    PageList<User> list(User user, PageBounds pageBounds);
-
+    List<User> list(User user);
 }
