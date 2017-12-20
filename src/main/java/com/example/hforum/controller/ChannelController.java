@@ -15,7 +15,7 @@ import java.util.Map;
 @Controller
 public class ChannelController {
     @Autowired
-    private ChannelService channelService;//555
+    private ChannelService channelService;
 
     @RequestMapping(value = "/list")
     @ResponseBody
