@@ -2,7 +2,7 @@ package com.example.hforum.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class IPUtil {
+public class IPUtil {  
 	/**
 	 * 
 	 * 
