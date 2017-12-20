@@ -48,9 +48,9 @@ public class UserController {
 
 	@RequestMapping(value = "/list")
 	@ResponseBody
-	public Map<String, Object> list(int pageIndex, int pageSize, User user) {
+	public Map<String, Object> list(int page, int limit, User user) {
 
-		PageBean pageBean = ResponseDataFactory.createPageBean(pageIndex, pageSize);
+		PageBean pageBean = ResponseDataFactory.createPageBean(page, limit);
 
 		List<User> list = userService.list(user, pageBean);
 

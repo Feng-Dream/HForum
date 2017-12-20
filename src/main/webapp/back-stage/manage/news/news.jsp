@@ -11,11 +11,36 @@
 <head>
     <title>新闻管理</title>
     <%@include file="/common/common.jsp" %>
-    <%@include file="/common/back-common.jsp" %>
-    <link rel="stylesheet" href="res/admin/plugins/beginner_admin/css/table.css"/>
+    <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css"  media="all">
 </head>
 <body>
-<div class="admin-main">
+<table class="layui-hide" id="test"></table>
+<script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'res/data.json'
+            ,cols: [[
+                {field:'id', width:80, title: 'ID', sort: true}
+                ,{field:'username', width:80, title: '用户名'}
+                ,{field:'sex', width:80, title: '性别', sort: true}
+                ,{field:'city', width:80, title: '城市'}
+                ,{field:'sign', title: '签名', minWidth: 150}
+                ,{field:'experience', width:80, title: '积分', sort: true}
+                ,{field:'score', width:80, title: '评分', sort: true}
+                ,{field:'classify', width:80, title: '职业'}
+                ,{field:'wealth', width:135, title: '财富', sort: true}
+            ]]
+            ,page: {
+                limits: [4, 8, 16]
+            }
+        });
+    });
+</script>
+<%--<div class="admin-main">
     <blockquote class="layui-elem-quote">
         <form class="layui-form" action="">
             <input type="text" id="select-channelName" name="channelName" value="${param.channelName}" placeholder="新闻标题/内容"
@@ -241,6 +266,6 @@
             $('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
         });
     });
-</script>
+</script>--%>
 </body>
 </html>

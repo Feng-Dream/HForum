@@ -11,10 +11,9 @@
 <head>
     <title>栏目管理</title>
     <%@include file="/common/common.jsp" %>
-    <%@include file="/common/back-common.jsp" %>
-    <link rel="stylesheet" href="res/admin/plugins/beginner_admin/css/table.css"/>
+    <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css"  media="all">
 </head>
-<body>
+<body style="margin: 15px">
 <div class="admin-main">
     <blockquote class="layui-elem-quote">
         <form class="layui-form" action="">
@@ -44,29 +43,67 @@
     <fieldset class="layui-elem-field">
         <legend>栏目数据</legend>
         <div class="layui-field-box layui-form">
-            <table class="layui-table admin-table">
-                <thead>
-                <tr>
-                    <th style="width: 30px;"><input type="checkbox" lay-filter="allselector" lay-skin="primary"></th>
-                    <th>栏目ID</th>
-                    <th>栏目名称</th>
-                    <th>排序</th>
-                    <th>是否选中</th>
-                    <th>是否为城市栏目</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody id="content">
-                </tbody>
-            </table>
+            <script type="text/html" id="selected">
+                <input type="checkbox" name="selected" value="{{d.selected}}" lay-skin="switch" lay-text="是|否" lay-filter="selected"  {{ d.selected == true ? 'checked' : '' }}>
+            </script>
+            <script type="text/html" id="city">
+                <input type="checkbox" name="city" value="{{d.city}}" lay-skin="switch" lay-text="是|否" lay-filter="city"  {{ d.city == true ? 'checked' : '' }}>
+            </script>
+                <table class="layui-hide" id="test"></table>
         </div>
+
     </fieldset>
-    <div class="admin-table-page">
-        <div id="paged" class="page">
-        </div>
-    </div>
+
 </div>
-<!--模板-->
+<script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('table', function(){
+        var channelName = "${param.channelName}";
+        //发送到服务端的参数
+        var  url = "channel/list.action";
+        if(channelName && channelName.trim() != ''){
+            url+="?channelName="+channelName;
+        }
+        var table = layui.table
+            ,form = layui.form;
+        table.render({
+            elem: '#test'
+            ,url:url,
+            cols: [[
+                 {type:'checkbox'},
+                 {field:'channelId',  title: '栏目ID', sort: true}
+                ,{field:'channelName',  title: '栏目名称'}
+                ,{field:'position',  title: '排序', sort: true}
+                ,{field:'selected',  title: '是否选中',templet: '#selected', unresize: true}
+                ,{field:'city', title: '是否为城市栏目',templet: '#city', unresize: true}
+                /*,{field:'experience', width:80, title: '操作'}*/
+            ]]
+            ,page: {
+                 limit:4,
+                 limits: [4, 8, 16]
+            }
+        });
+        //监听选中操作
+        form.on('switch(selected)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+
+        //监听城市操作
+        form.on('switch(city)', function(obj){
+            layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
+        });
+        //监听查询操作
+        $('#search').on('click', function () {
+            var c = $("#select-channelName").val();
+            var url = "back-stage/manage/news/channel.jsp";
+            if (c && c.trim() != '') {
+                url += "?channelName="+c;
+            }
+            window.location.href = url;
+            });
+    });
+</script>
+<%--<!--模板-->
 <script type="text/html" id="tpl">
     {{# layui.each(d.list, function(index, item){ }}
     <tr>
@@ -244,6 +281,6 @@
             $('#layui-layer' + index).children('div.layui-layer-content').css('color', '#000000');
         });
     });
-</script>
+</script>--%>
 </body>
 </html>

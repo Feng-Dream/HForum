@@ -20,9 +20,9 @@ public class ChannelController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public Map<String, Object> list(int pageIndex, int pageSize, Channel channel) {
+    public Map<String, Object> list(int page, int limit, Channel channel) {
 
-        PageBean pageBean = ResponseDataFactory.createPageBean(pageIndex, pageSize);
+        PageBean pageBean = ResponseDataFactory.createPageBean(page, limit);
 
         List<Channel> list = channelService.list(channel, pageBean);
 
