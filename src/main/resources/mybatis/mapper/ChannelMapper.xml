@@ -96,6 +96,9 @@
         <if test="channelName != null and !&quot;&quot;.equals(channelName.trim())">
             and channel_name like concat('%',trim(#{channelName,jdbcType=VARCHAR}),'%')
         </if>
+        <if test="selected != null">
+            and  selected = #{selected,jdbcType=BIT}
+        </if>
     </sql>
 
 

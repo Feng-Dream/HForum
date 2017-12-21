@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ChannelService {
     public List<Channel> list(Channel channel,PageBean pageBean);
+
+    public int edit(Channel record);
 }

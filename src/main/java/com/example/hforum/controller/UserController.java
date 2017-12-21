@@ -50,7 +50,7 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> list(int page, int limit, User user) {
 
-		PageBean pageBean = ResponseDataFactory.createPageBean(page, limit);
+		PageBean pageBean = ResponseDataFactory.createPageBean(page, limit,true);
 
 		List<User> list = userService.list(user, pageBean);
 

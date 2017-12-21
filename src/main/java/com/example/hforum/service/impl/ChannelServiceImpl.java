@@ -19,4 +19,9 @@ public class ChannelServiceImpl implements ChannelService {
         List<Channel> list = channelMapper.list(channel);
         return list;
     }
+
+    @Override
+    public int edit(Channel record) {
+      return channelMapper.updateByPrimaryKeySelective(record);
+    }
 }

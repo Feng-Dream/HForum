@@ -51,7 +51,7 @@ private UserService userService;
     public void list() {
         User user  =new User();
         user.setUserName("测");
-        PageBean pageBean = ResponseDataFactory.createPageBean(1, 3);
+        PageBean pageBean = ResponseDataFactory.createPageBean(1, 3,true);
         List<User> list = userService.list(user, pageBean);
         Map<String, Object> stringObjectMap = ResponseDataFactory.buildResponseDataMap(pageBean, list);
         System.out.println(stringObjectMap.get("count"));
