@@ -21,7 +21,7 @@ public class ChannelServiceImplTest {
     private Channel channel;
     @Before
     public void setUp() throws Exception {
-         channel =new Channel();
+        channel =new Channel();
     }
 
     @Test
@@ -34,5 +34,31 @@ public class ChannelServiceImplTest {
              ) {
             System.out.println(c);
         }
+    }
+
+    @Test
+    public void selectMaxPostion() {
+        channel.setSelected(false);
+        System.out.println(channelService.selectMaxPostion(channel));
+    }
+    @Test
+    public void selectBackChannel() {
+        channel.setSelected(true);
+        channel.setChannelId(11);
+        List<Channel> channels = channelService.selectBackChannel(channel);
+        System.out.println(channels.size());
+//        for (Channel c:channels
+//                ) {
+//            System.out.println(c);
+//        }
+        //return channelService.selectBackChannel(record);
+    }
+
+    @Test
+    public void edit() {
+       // channelPo.setSelected(false);
+        channel.setCity(false);
+        channel.setChannelId(5);
+        channelService.edit(channel);
     }
 }

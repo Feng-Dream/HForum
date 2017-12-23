@@ -4,7 +4,7 @@ var mh1 = function (id) {
 };
 //获取tagName
 var mh2 = function (tagName, oParent) {
- return (oParent || document).getElementsByTagName(tagName);
+    return (oParent || document).getElementsByTagName(tagName);
 };
 //获取class
 var mh3 = function (sClass, oParent) {
@@ -42,9 +42,9 @@ PhotoWall.prototype = {
         this.aData = aData;
         this.dom = document.documentElement || document.body;
         this.create();
-        this.oBtn.onclick = function () {
-            oThis.randomOrder()
-        }
+        // this.oBtn.onclick = function () {
+        //     oThis.randomOrder()
+        // }
     },
     create: function () {
         var aFrag = document.createDocumentFragment();
@@ -53,7 +53,13 @@ PhotoWall.prototype = {
             var oLi = document.createElement("li");
             var oa = document.createElement("a");
             oa.href = "javascript:;";
-            oa.className = "layui-btn layui-btn-normal";
+            if (this.aData[i].selected) {
+                oa.className = "layui-btn";
+            }
+            else {
+                oa.className = "layui-btn layui-btn-primary";
+            }
+
             oa.innerText = this.aData[i].channelName;
             oLi.appendChild(oa);
             aFrag.appendChild(oLi)
@@ -200,33 +206,91 @@ window.onload = function () {
 
     var aBox = mh3("box");
     var aExample = [];
-    var aData = [];
+    var aData1 = [];
+    var aData2 = [];
     //生成图片数据
     var url = "channel/list.action";
-    var d = {selected: true, paginate: false};
+    var d = {paginate: false};
 
     $.ajax({
-        type : "POST",
-        url : url,
-        async:false,
-        data : d,
+        type: "POST",
+        url: url,
+        async: false,
+        data: d,
 
-        success : function(result) {
-    for (i = 0; i < result.data.length; i++) {
-          aData[i] = result.data[i];
-       }
-     }
+        success: function (result) {
+            for (i = 0; i < result.data.length; i++) {
+                if (result.data[i].selected) {
+                    aData1[aData1.length] = result.data[i];
+                }
+                else {
+                    aData2[aData2.length] = result.data[i];
+                }
+            }
+        }
     });
 
-    // //循环创建多个实例
-    for (i = 0; i < aBox.length; i++)
-    {
-    	var oExample = new PhotoWall(aBox[i], aData);
-    	aExample.push(oExample)
-    }
-    this.onresize = function ()
-    {
-    	for (var p in aExample) aExample[p].changeLayout()
+    //创建实例
+    var oExample1 = new PhotoWall(aBox[0], aData1);
+    var oExample2 = new PhotoWall(aBox[1], aData2);
+    aExample.push(oExample1);
+    aExample.push(oExample2);
+    this.onresize = function () {
+        for (var p in aExample) aExample[p].changeLayout()
     };
-    this.onresize()
+    this.onresize();
+
+    $("#save-postions").click(function () {
+        var aData3 = aData1.concat(aData2);
+        $.each($("ul"), function (i) {
+            $.each($(this).find("li"), function (j) {
+                var htmlPostion = parseInt(($(this).css("left")).replace("px", "")) + parseInt(($(this).css("top")).replace("px", ""));
+
+                if (i == 0) {
+                    for (var k = 0; k < aData1.length; k++) {
+                        var wallPostion = oExample1.aPos[k].left + oExample1.aPos[k].top;
+                        if (htmlPostion == wallPostion) {
+                            aData3[j].position = k + 1;
+                            break;
+                        }
+                    }
+                }
+                else if (i == 1) {
+                    for (var k = 0; k < aData2.length; k++) {
+                        var wallPostion = oExample2.aPos[k].left + oExample2.aPos[k].top;
+                        if (htmlPostion == wallPostion) {
+                            aData3[aData1.length + j].position = k + 1;
+                            break;
+                        }
+                    }
+                }
+            });
+        });
+        var channels = [];
+        //只更新postion就行了
+        $.each(aData3, function () {
+            channels[channels.length] = {"channelId": this.channelId, "position": this.position}
+        });
+        $.ajax({
+            type: "POST",
+            url: "channel/updatePostions.action",
+            async: false,
+            data: JSON.stringify(channels),//@RequestBody接收的是一个json串,而不是json对象
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                if (result == 0) {
+                    parent.layer.msg("操作成功");
+                    parent.location.reload();
+                    //当你在iframe页面关闭自身时
+                    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                }
+                else {
+                    parent.layer.msg("保存失败");
+                }
+            }
+        });
+    });
 };
+

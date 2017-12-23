@@ -15,9 +15,16 @@ public interface ChannelMapper {
 
     Channel selectByPrimaryKey(Integer channelId);
 
+    Channel selectByChannelName(String channelName);
+
     int updateByPrimaryKeySelective(Channel record);
 
     int updateByPrimaryKey(Channel record);
 
     List<Channel> list(Channel channel);
+
+    int selectMaxPostion(Channel record);
+
+    //查询排序在该栏目后面的栏目
+    List<Channel> selectBackChannel(Channel record);
 }

@@ -110,7 +110,7 @@ public class LoginRealm extends AuthorizingRealm {
 
 	public static void main(String[] args) {
 
-		SimpleHash simpleHash = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("203"), 1024);
+		SimpleHash simpleHash = new SimpleHash("MD5", "123456", ByteSource.Util.bytes("2"), 1024);
 		System.out.println(simpleHash);
 	}
 

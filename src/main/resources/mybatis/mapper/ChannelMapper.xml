@@ -97,7 +97,7 @@
             and channel_name like concat('%',trim(#{channelName,jdbcType=VARCHAR}),'%')
         </if>
         <if test="selected != null">
-            and  selected = #{selected,jdbcType=BIT}
+            and selected = #{selected,jdbcType=BIT}
         </if>
     </sql>
 
@@ -107,5 +107,20 @@
         <where>
             <include refid="whereCondition"></include>
         </where>
+        order by   selected desc ,position asc
+    </select>
+
+    <select id="selectMaxPostion" parameterType="com.example.hforum.model.Channel" resultType="java.lang.Integer">
+        select max(position) from channel where selected = #{selected,jdbcType=BIT}
+    </select>
+
+    <select id="selectByChannelName" parameterType="java.lang.String"  resultMap="BaseResultMap">
+        select * from channel where channel_name = #{channelName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectBackChannel" parameterType="com.example.hforum.model.Channel" resultMap="BaseResultMap">
+        select * from channel where position &gt;
+       (select position from channel where channel_id = #{channelId,jdbcType=INTEGER})
+        and selected = #{selected,jdbcType=BIT}
     </select>
 </mapper>
