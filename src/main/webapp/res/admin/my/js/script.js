@@ -208,7 +208,7 @@ window.onload = function () {
     var aExample = [];
     var aData1 = [];
     var aData2 = [];
-    //生成图片数据
+    //生成数据
     var url = "channel/list.action";
     var d = {paginate: false};
 

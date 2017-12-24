@@ -10,139 +10,291 @@
 <head>
     <title>Title</title>
     <%@include file="/common/common.jsp" %>
-    <link rel="stylesheet" type="text/css" href="res/admin/plugins/H-ui.admin/static/h-ui/css/H-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="res/admin/plugins/H-ui.admin/static/h-ui.admin/css/H-ui.admin.css" />
-    <link rel="stylesheet" type="text/css" href="res/admin/plugins/H-ui.admin/lib/Hui-iconfont/1.0.8/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="res/admin/plugins/H-ui.admin/static/h-ui.admin/skin/default/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="res/admin/plugins/H-ui.admin/static/h-ui.admin/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/webuploader.css">
+    <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/style.css">
+    <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
 
+    <script type="text/javascript" charset="utf-8" src="res/admin/plugins/ueditor-1.4.3.3/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="res/admin/plugins/ueditor-1.4.3.3/ueditor.all.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="res/admin/plugins/ueditor-1.4.3.3/lang/zh-cn/zh-cn.js"></script>
 
 </head>
-<body>
-<article class="page-container">
-    <form class="form form-horizontal" id="form-article-add">
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章标题：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="articletitle" name="articletitle">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">简略标题：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="articletitle2" name="articletitle2">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
-            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select name="articlecolumn" class="select">
-					<option value="0">全部栏目</option>
-					<option value="1">新闻资讯</option>
-					<option value="11">├行业动态</option>
-					<option value="12">├行业资讯</option>
-					<option value="13">├行业新闻</option>
-				</select>
-				</span> </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章类型：</label>
-            <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
-				<select name="articletype" class="select">
-					<option value="0">全部类型</option>
-					<option value="1">帮助说明</option>
-					<option value="2">新闻资讯</option>
-				</select>
-				</span> </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">排序值：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="0" placeholder="" id="articlesort" name="articlesort">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">关键词：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="" id="keywords" name="keywords">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">文章摘要：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">文章作者：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="0" placeholder="" id="author" name="author">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">文章来源：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="0" placeholder="" id="sources" name="sources">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">允许评论：</label>
-            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-                <div class="check-box">
-                    <input type="checkbox" id="allowcomments" name="allowcomments" value="">
-                    <label for="checkbox-pinglun">&nbsp;</label>
-                </div>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">评论开始日期：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'commentdatemax\')||\'%y-%M-%d\'}' })" id="commentdatemin" name="commentdatemin" class="input-text Wdate">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">评论结束日期：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'commentdatemin\')}' })" id="commentdatemax" name="commentdatemax" class="input-text Wdate">
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">使用独立模版：</label>
-            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
-                <div class="check-box">
-                    <input type="checkbox" id="checkbox-moban">
-                    <label for="checkbox-moban">&nbsp;</label>
-                </div>
-                <button onClick="mobanxuanze()" class="btn btn-default radius ml-10">选择模版</button>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">缩略图：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <div class="uploader-thum-container">
-                    <div id="fileList" class="uploader-list"></div>
-                    <div id="filePicker">选择图片</div>
-                    <button id="btn-star" class="btn btn-default btn-uploadstar radius ml-10">开始上传</button>
-                </div>
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">文章内容：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
-                 </div>
-              </div>
+<body style="margin: 15px;">
 
-         <div  class="row cl">
-                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-                    <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-                <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
-                <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+<fieldset class="layui-elem-field layui-field-title">
+    <legend>添加新闻</legend>
+</fieldset>
+<form class="layui-form layui-form-pane" action="" id="add-news-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color:#F00">*</span>文章标题</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" autocomplete="off" lay-verify="required" , placeholder="请输入文章标题"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label"><span style="color:#F00">*</span>文章来源</label>
+        <div class="layui-input-block">
+            <input type="text" name="title" autocomplete="off" lay-verify="required" , placeholder="请输入文章来源"
+                   class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="width: 200px"><span style="color:#F00">*</span>分类栏目(最多可选3个)</label>
+        <div class="layui-input-inline">
+            <select name="channelId" id="channel-1" lay-verify="required" lay-filter="channel-1">
+            </select>
+        </div>
+        <div class="layui-input-inline" style="display: none" id="channel-2-div">
+            <select name="channelId" id="channel-2" lay-filter="channel-2">
+            </select>
+        </div>
+        <div class="layui-input-inline" style="display: none" id="channel-3-div">
+            <select name="channelId" id="channel-3" lay-filter="channel-3">
+            </select>
+        </div>
+        <div class="layui-input-inline" id="add-channel-div">
+            <a href="javascript:;" id="add-channel" class="layui-btn">
+                <i class="layui-icon">&#xe654;</i></a>
+        </div>
+    </div>
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">允许评论</label>
+        <div class="layui-input-block">
+            <input type="checkbox" lay-text="开|关" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+                   title="评论开关">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">&nbsp;&nbsp;&nbsp;文章封面</label>
+        <div class="layui-input-block">
+            <%--     <div id="wrapper"  class="layui-textarea">
+                     <div id="container">--%>
+            <!--头部，相册选择和格式选择-->
+            <div id="uploader" class="layui-textarea">
+                <div class="queueList">
+                    <div id="dndArea" class="placeholder">
+                        <div id="filePicker">
+                            <span><i class="layui-icon" style="font-size: 18px;margin-right: 10px; ">&#xe60d;</i>点击选择文件</span>
+                            <%--   <i class="layui-icon" style="font-size: 20px; ">&#xe60d;</i>--%>
+                        </div>
+                        <p style="font-family: STHupo;color: #60a3f5">或将图片拖拽到虚线框内，单次最多可选300张</p>
+                    </div>
                 </div>
-          </div>
-       </form>
-  </article>
+                <div class="statusBar" style="display:none;">
+                    <div class="progress">
+                        <span class="text">0%</span>
+                        <span class="percentage"></span>
+                    </div>
+                    <div class="info"></div>
+                    <div class="btns">
+                        <div id="filePicker2">
+                        </div>
+                        <div class="uploadBtn">开始上传
+                            <%--<a href="javascript:;" class="layui-btn">
+                                <i class="layui-icon">&#xe654;</i> 开始上传
+                            </a>--%>
+                        </div>
+                    </div>
+                </div>
+                <%--  </div>
+              </div>--%>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label"><span style="color:#F00">*</span>文章内容</label>
+        <div class="layui-input-block">
+            <%-- <div class="layui-textarea">
+                 <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
+           </div>--%>
+            <textarea id="editor" class="layui-textarea" style="width:100%;height:100%;"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item" style="float: right">
+        <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon">&#xe622;</i>保存草稿</button>
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo2"><i class="layui-icon">&#x1005;</i>保存并提交审核
+        </button>
+    </div>
+</form>
+<script type="text/javascript" src="res/admin/plugins/webuploader-0.1.5/js/webuploader.js"></script>
+<script type="text/javascript" src="res/admin/my/js/upload.js"></script>
+<script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['form'], function () {
+        var form = layui.form
+            , layer = layui.layer
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            if (this.checked) {
+                layer.tips('评论已开启', data.othis)
+            }
+            else {
+                layer.tips('评论已关闭', data.othis)
+            }
+        });
+
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        form.on('select(channel-1)', function (data) {
+            // console.log(data.elem); //得到select原始DOM对象
+            // console.log(data.value); //得到被选中的值
+            // console.log(data.othis); //得到美化后的DOM对象
+            if (data.value == "") {
+                $("#channel-2-div").hide();
+                $("#channel-3-div").hide();
+                $("#add-channel-div").show();
+            }
+        });
+        form.on('select(channel-2)', function (data) {
+            if (data.value == "") {
+                $("#channel-3-div").hide();
+                $("#add-channel-div").show();
+            }
+        });
+
+
+    });
+</script>
+<script type="text/javascript" src="res/admin/my/js/channel-select.js"/>
+<script type="text/javascript">
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+
+
+    function isFocus(e) {
+        alert(UE.getEditor('editor').isFocus());
+        UE.dom.domUtils.preventDefault(e)
+    }
+
+    function setblur(e) {
+        UE.getEditor('editor').blur();
+        UE.dom.domUtils.preventDefault(e)
+    }
+
+    function insertHtml() {
+        var value = prompt('插入html代码', '');
+        UE.getEditor('editor').execCommand('insertHtml', value)
+    }
+
+    function createEditor() {
+        enableBtn();
+        UE.getEditor('editor');
+    }
+
+    function getAllHtml() {
+        alert(UE.getEditor('editor').getAllHtml())
+    }
+
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+
+    function getPlainTxt() {
+        var arr = [];
+        arr.push("使用editor.getPlainTxt()方法可以获得编辑器的带格式的纯文本内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getPlainTxt());
+        alert(arr.join('\n'))
+    }
+
+    function setContent(isAppendTo) {
+        var arr = [];
+        arr.push("使用editor.setContent('欢迎使用ueditor')方法可以设置编辑器的内容");
+        UE.getEditor('editor').setContent('欢迎使用ueditor', isAppendTo);
+        alert(arr.join("\n"));
+    }
+
+    function setDisabled() {
+        UE.getEditor('editor').setDisabled('fullscreen');
+        disableBtn("enable");
+    }
+
+    function setEnabled() {
+        UE.getEditor('editor').setEnabled();
+        enableBtn();
+    }
+
+    function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    }
+
+    function getContentTxt() {
+        var arr = [];
+        arr.push("使用editor.getContentTxt()方法可以获得编辑器的纯文本内容");
+        arr.push("编辑器的纯文本内容为：");
+        arr.push(UE.getEditor('editor').getContentTxt());
+        alert(arr.join("\n"));
+    }
+
+    function hasContent() {
+        var arr = [];
+        arr.push("使用editor.hasContents()方法判断编辑器里是否有内容");
+        arr.push("判断结果为：");
+        arr.push(UE.getEditor('editor').hasContents());
+        alert(arr.join("\n"));
+    }
+
+    function setFocus() {
+        UE.getEditor('editor').focus();
+    }
+
+    function deleteEditor() {
+        disableBtn();
+        UE.getEditor('editor').destroy();
+    }
+
+    function disableBtn(str) {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            if (btn.id == str) {
+                UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+            } else {
+                btn.setAttribute("disabled", "true");
+            }
+        }
+    }
+
+    function enableBtn() {
+        var div = document.getElementById('btns');
+        var btns = UE.dom.domUtils.getElementsByTagName(div, "button");
+        for (var i = 0, btn; btn = btns[i++];) {
+            UE.dom.domUtils.removeAttributes(btn, ["disabled"]);
+        }
+    }
+
+    function getLocalData() {
+        alert(UE.getEditor('editor').execCommand("getlocaldata"));
+    }
+
+    function clearLocalData() {
+        UE.getEditor('editor').execCommand("clearlocaldata");
+        alert("已清空草稿箱")
+    }
+</script>
 
 </body>
 

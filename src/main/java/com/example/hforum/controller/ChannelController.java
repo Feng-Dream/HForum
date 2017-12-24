@@ -23,7 +23,7 @@ public class ChannelController {
     @Autowired
     private ChannelService channelService;
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)//
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
     public void add(@RequestBody Channel channel,HttpServletResponse response) throws IOException {
         int i = channelService.add(channel);
         System.out.println(channel);
@@ -32,6 +32,8 @@ public class ChannelController {
         out.flush();
         out.close();
     }
+
+
 
 
     @RequestMapping(value = "/list")

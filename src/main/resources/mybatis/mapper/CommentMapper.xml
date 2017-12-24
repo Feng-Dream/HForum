@@ -9,10 +9,11 @@
     <result column="super_comment_id" jdbcType="INTEGER" property="superCommentId" />
     <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
     <result column="comment_thumb" jdbcType="INTEGER" property="commentThumb" />
+    <result column="allow_show" jdbcType="BIT" property="allowShow" />
   </resultMap>
   <sql id="Base_Column_List">
     comment_id, comment_content, comment_user_id, comment_news_id, super_comment_id, 
-    comment_time, comment_thumb
+    comment_time, comment_thumb, allow_show
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,10 +28,10 @@
   <insert id="insert" parameterType="com.example.hforum.model.Comment">
     insert into comment (comment_id, comment_content, comment_user_id, 
       comment_news_id, super_comment_id, comment_time, 
-      comment_thumb)
+      comment_thumb, allow_show)
     values (#{commentId,jdbcType=INTEGER}, #{commentContent,jdbcType=VARCHAR}, #{commentUserId,jdbcType=BIGINT}, 
       #{commentNewsId,jdbcType=BIGINT}, #{superCommentId,jdbcType=INTEGER}, #{commentTime,jdbcType=TIMESTAMP}, 
-      #{commentThumb,jdbcType=INTEGER})
+      #{commentThumb,jdbcType=INTEGER}, #{allowShow,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.example.hforum.model.Comment">
     insert into comment
@@ -56,6 +57,9 @@
       <if test="commentThumb != null">
         comment_thumb,
       </if>
+      <if test="allowShow != null">
+        allow_show,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="commentId != null">
@@ -78,6 +82,9 @@
       </if>
       <if test="commentThumb != null">
         #{commentThumb,jdbcType=INTEGER},
+      </if>
+      <if test="allowShow != null">
+        #{allowShow,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -102,6 +109,9 @@
       <if test="commentThumb != null">
         comment_thumb = #{commentThumb,jdbcType=INTEGER},
       </if>
+      <if test="allowShow != null">
+        allow_show = #{allowShow,jdbcType=BIT},
+      </if>
     </set>
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
@@ -112,7 +122,8 @@
       comment_news_id = #{commentNewsId,jdbcType=BIGINT},
       super_comment_id = #{superCommentId,jdbcType=INTEGER},
       comment_time = #{commentTime,jdbcType=TIMESTAMP},
-      comment_thumb = #{commentThumb,jdbcType=INTEGER}
+      comment_thumb = #{commentThumb,jdbcType=INTEGER},
+      allow_show = #{allowShow,jdbcType=BIT}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
 </mapper>

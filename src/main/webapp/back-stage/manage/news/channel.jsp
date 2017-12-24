@@ -71,6 +71,7 @@
 <script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
 <script>
     layui.use('table', function () {
+        var loading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
         var channelName = "${param.channelName}";
         //发送到服务端的参数
         var url = "channel/list.action";
@@ -94,6 +95,9 @@
             , page: {
                 limit: 4,
                 limits: [4, 8, 16]
+            },
+            done: function(res, curr, count){
+                layer.close(loading);
             }
         });
         //监听选中操作
@@ -111,6 +115,7 @@
                 } else {
                     layer.msg("操作失败");
                 }
+
                 window.location.reload();
             });
         });
