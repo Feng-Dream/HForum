@@ -23,10 +23,10 @@ $(function () {
              * UE.delEditor('editor');   //先删除之前实例的对象
              *UE.getEditor('editor');    //添加编辑器
              *
-             * 2.对目标DOM进行手动渲染
-             * UE.getEditor('editor').render('editor');   //使用之前的对象(同时渲染DOM)
+             * 2.使用之前的对象
+             * UE.getEditor('editor');   //使用之前的对象
              */
-            UE.getEditor('editor').render('editor');
+            UE.getEditor('editor');//使用之前的对象
         }
     });
 
