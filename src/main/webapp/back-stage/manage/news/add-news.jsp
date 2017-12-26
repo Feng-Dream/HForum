@@ -72,7 +72,7 @@
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">&nbsp;&nbsp;&nbsp;文章封面</label>
+        <label class="layui-form-label">&nbsp;&nbsp;&nbsp;文章封面(最多上传4张封面)</label>
         <div class="layui-input-block">
             <%--     <div id="wrapper"  class="layui-textarea">
                      <div id="container">--%>
@@ -84,7 +84,7 @@
                             <span><i class="layui-icon" style="font-size: 18px;margin-right: 10px; ">&#xe60d;</i>点击选择文件</span>
                             <%--   <i class="layui-icon" style="font-size: 20px; ">&#xe60d;</i>--%>
                         </div>
-                        <p style="font-family: STHupo;color: #60a3f5">或将图片拖拽到虚线框内，单次最多可选300张</p>
+                        <p style="font-family: STHupo;color: #60a3f5">或将图片拖拽到虚线框内，单次最多可选4张</p>
                     </div>
                 </div>
                 <div class="statusBar" style="display:none;">
