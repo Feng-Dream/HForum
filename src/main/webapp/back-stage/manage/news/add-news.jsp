@@ -27,6 +27,7 @@
     <legend>添加新闻</legend>
 </fieldset>
 <form class="layui-form layui-form-pane" action="" id="add-news-form">
+    <input id="userId" name="createUserId" type="hidden" value="<shiro:principal property="userId"/>">
     <div class="layui-form-item">
         <label class="layui-form-label"><span style="color:#F00">*</span>文章标题</label>
         <div class="layui-input-block">

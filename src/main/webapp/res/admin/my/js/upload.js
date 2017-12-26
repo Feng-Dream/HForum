@@ -138,28 +138,30 @@
         }
 
         // 实例化
+        var userId = $("#userId").val();
         uploader = WebUploader.create({
             pick: {
                 id: '#filePicker',
               /*  label: '点击选择文件'*/
             },
             formData: {
-                uid: 123
+                userId: userId
             },
             dnd: '#dndArea',
             paste: '#uploader',
             swf: 'res/admin/plugins/webuploader-0.1.5/Uploader.swf',
             chunked: true,
             chunkSize: 512 * 1024,
-            server: '../server/fileupload.php',
+            //fileVal:'images',//此属性是你提交的图片的name属性值,如果不设置,系统有默认值
+            server: 'image/uploadImages.action',//请求后台的入口
             method:'POST',
             // runtimeOrder: 'flash',
-
-            // accept: {
-            //     title: 'Images',
-            //     extensions: 'gif,jpg,jpeg,bmp,png',
-            //     mimeTypes: 'image/*'
-            // },
+            // 只允许选择图片文件。
+            accept: {
+                title: 'Images',
+                extensions: 'gif,jpg,jpeg,bmp,png',
+                mimeTypes: 'image/*'
+            },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
@@ -547,6 +549,10 @@
         uploader.onError = function( code ) {
             alert( 'Eroor: ' + code );
         };
+
+        uploader.on( 'uploadSuccess', function( result ) {
+           alert(result);
+        });
 
         $upload.on('click', function() {
             if ( $(this).hasClass( 'disabled' ) ) {

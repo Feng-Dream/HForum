@@ -2,7 +2,7 @@ package com.example.hforum.service.impl;
 
 import com.example.hforum.model.User;
 import com.example.hforum.service.UserService;
-import com.example.hforum.utils.NumberUtil;
+import com.example.hforum.utils.IDUtil;
 import com.example.hforum.utils.PageBean;
 import com.example.hforum.utils.ResponseDataFactory;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -36,7 +36,7 @@ private UserService userService;
           User  user =new User();
           user.setUserName("用户12345"+i);
 
-          Long  phone = Long.parseLong("139"+  NumberUtil.createNumber(10000000,99999999));
+          Long  phone = Long.parseLong("139"+  IDUtil.createNumber(10000000,99999999));
           user.setCellPhoneNumber(phone);
           user.setEmail(i+"234432@qq.com");
           user.setPassword(simpleHash.toString());

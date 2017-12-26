@@ -21,7 +21,7 @@ public class FilterChainDefinitionMapBuilder {
         map.put("/common/500.jsp", "anon");
         map.put("/common/common.jsp", "anon");
         //map.put("/shiro/logout", "logout");
-        map.put("/back-stage/manage/index.jsp", "authc,roles[后台人员]");
+        map.put("/back-stage/manage/**", "authc,roles[后台人员]");
 
         map.put("/**", "anon");
 

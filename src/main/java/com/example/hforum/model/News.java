@@ -1,7 +1,5 @@
 package com.example.hforum.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 public class News {
@@ -10,30 +8,16 @@ public class News {
     private String newsTitle;
 
     private String newsFrom;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+
     private Date createTime;
 
     private Long createUserId;
 
-    private Date forReviewTime;
-
-    private Long aduitUserId;
-
     private Date releaseTime;
-
-    private Date soldoutTime;
-
-    private Long soldoutUserId;
 
     private Integer newsThumb;
 
-    private Integer newsStatus;
-
-    private Integer layoutType;
-
-    private String aduitFailureCause;
-
-    private Boolean allowComment;
+    private Boolean newsDelete;
 
     private String newsContent;
 
@@ -77,44 +61,12 @@ public class News {
         this.createUserId = createUserId;
     }
 
-    public Date getForReviewTime() {
-        return forReviewTime;
-    }
-
-    public void setForReviewTime(Date forReviewTime) {
-        this.forReviewTime = forReviewTime;
-    }
-
-    public Long getAduitUserId() {
-        return aduitUserId;
-    }
-
-    public void setAduitUserId(Long aduitUserId) {
-        this.aduitUserId = aduitUserId;
-    }
-
     public Date getReleaseTime() {
         return releaseTime;
     }
 
     public void setReleaseTime(Date releaseTime) {
         this.releaseTime = releaseTime;
-    }
-
-    public Date getSoldoutTime() {
-        return soldoutTime;
-    }
-
-    public void setSoldoutTime(Date soldoutTime) {
-        this.soldoutTime = soldoutTime;
-    }
-
-    public Long getSoldoutUserId() {
-        return soldoutUserId;
-    }
-
-    public void setSoldoutUserId(Long soldoutUserId) {
-        this.soldoutUserId = soldoutUserId;
     }
 
     public Integer getNewsThumb() {
@@ -125,36 +77,12 @@ public class News {
         this.newsThumb = newsThumb;
     }
 
-    public Integer getNewsStatus() {
-        return newsStatus;
+    public Boolean getNewsDelete() {
+        return newsDelete;
     }
 
-    public void setNewsStatus(Integer newsStatus) {
-        this.newsStatus = newsStatus;
-    }
-
-    public Integer getLayoutType() {
-        return layoutType;
-    }
-
-    public void setLayoutType(Integer layoutType) {
-        this.layoutType = layoutType;
-    }
-
-    public String getAduitFailureCause() {
-        return aduitFailureCause;
-    }
-
-    public void setAduitFailureCause(String aduitFailureCause) {
-        this.aduitFailureCause = aduitFailureCause == null ? null : aduitFailureCause.trim();
-    }
-
-    public Boolean getAllowComment() {
-        return allowComment;
-    }
-
-    public void setAllowComment(Boolean allowComment) {
-        this.allowComment = allowComment;
+    public void setNewsDelete(Boolean newsDelete) {
+        this.newsDelete = newsDelete;
     }
 
     public String getNewsContent() {

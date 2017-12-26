@@ -1,11 +1,9 @@
 package com.example.hforum.mapper;
 
 import com.example.hforum.model.News;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface NewsMapper {
     int deleteByPrimaryKey(Long newsId);
 

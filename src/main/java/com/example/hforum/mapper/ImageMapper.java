@@ -1,7 +1,9 @@
 package com.example.hforum.mapper;
 
 import com.example.hforum.model.Image;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ImageMapper {
     int deleteByPrimaryKey(Long imageId);
 
