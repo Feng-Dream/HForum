@@ -166,7 +166,6 @@ public final class ConfigManager {
 
     private String getConfigPath() {
         String configPath =  this.rootPath + "res/conf/" + ConfigManager.configFileName;
-        System.out.println(configPath);
         return configPath;
     }
 
