@@ -17,9 +17,9 @@ public class HForumExceptionResolver implements HandlerExceptionResolver {
         if (ex instanceof UnauthorizedException) {
             // 没有权限异常
             mv.setViewName("/common/403");
-        } else if (ex instanceof GlobalException) {
+        } else if (ex instanceof HForumException) {
             //自定义异常
-            mv.addObject("message", ((GlobalException) ex).getMessage());
+            mv.addObject("message", ((HForumException) ex).getMessage());
         } else {
             //未知异常
             mv.setViewName("/common/500");

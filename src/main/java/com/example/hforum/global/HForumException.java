@@ -1,13 +1,13 @@
 package com.example.hforum.global;
 
-public class GlobalException extends Exception {
+public class HForumException extends Exception {
 
 	private static final long serialVersionUID = -1383134987162495589L;
 
 	// 异常信息
 	private String message;
 
-	public GlobalException(String message) {
+	public HForumException(String message) {
 		super(message);
 		this.message = message;
 	}

@@ -1,6 +1,6 @@
 package com.example.hforum.utils;
 
-import com.example.hforum.global.GlobalException;
+import com.example.hforum.global.HForumException;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,17 +10,17 @@ public class WebuploaderUtil {
     private static final String allowSuffix = "jpg|png|gif|jpeg|bmp";//允许文件格式
     private static final long allowSize = 2 * 1024 * 1024L;//允许文件大小 2MB
 
-    public static void checkFile(MultipartFile file) throws GlobalException {
+    public static void checkFile(MultipartFile file) throws HForumException {
         if (file == null) {
-            throw new GlobalException("文件不能为空");
+            throw new HForumException("文件不能为空");
         }
         // file.getOriginalFilename()是得到上传时的文件名
         String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
         int length = allowSuffix.indexOf(suffix);
         if (length == -1) {
-            throw new GlobalException("请上传允许格式的文件");
+            throw new HForumException("请上传允许格式的文件");
         } else if (file.getSize() > allowSize) {
-            throw new GlobalException("您上传的文件大小已经超出范围");
+            throw new HForumException("您上传的文件大小已经超出范围");
         }
     }
 
