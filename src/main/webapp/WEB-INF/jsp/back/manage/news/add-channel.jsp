@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>添加栏目</title>
-    <%@include file="/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
 </head>
 <body>

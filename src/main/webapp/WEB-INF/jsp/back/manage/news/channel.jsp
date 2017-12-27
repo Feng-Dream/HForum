@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>栏目管理</title>
-    <%@include file="/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
 </head>
 <body style="margin: 15px">
@@ -74,7 +74,7 @@
         var loading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
         var channelName = "${param.channelName}";
         //发送到服务端的参数
-        var url = "channel/list.action";
+        var url = "channel/list";
         if (channelName && channelName.trim() != '') {
             url += "?channelName=" + channelName;
         }
@@ -104,7 +104,7 @@
         form.on('switch(selected)', function (obj) {
             var selected = obj.elem.checked;
             var channelId = this.name;
-            var url = "channel/edit.action";
+            var url = "channel/edit";
             var data = {
                 "selected": selected,
                 "channelId": channelId
@@ -124,7 +124,7 @@
         form.on('switch(city)', function (obj) {
             var city = obj.elem.checked;
             var channelId = this.name;
-            var url = "channel/edit.action";
+            var url = "channel/edit";
             var data = {
                 "city": city,
                 "channelId": channelId
@@ -141,7 +141,7 @@
         //监听查询操作
         $('#search').on('click', function () {
             var c = $("#select-channelName").val();
-            var url = "back-stage/manage/news/channel.jsp";
+            var url = "back/manage/news/channel";
             if (c && c.trim() != '') {
                 url += "?channelName=" + c;
             }
@@ -152,7 +152,7 @@
             var value = obj.value //得到修改后的值
                 , data = obj.data //得到所在行所有键值
                 , field = obj.field; //得到字段
-            var url = "channel/edit.action";
+            var url = "channel/edit";
             var mydata = {
                 "channelName": value,
                 "channelId": data.channelId
@@ -172,7 +172,7 @@
                 type: 2,
                 area: ['600px', '400px'],
                 title: ['长按拖拽排序', 'font-size:18px;'],
-                content: 'back-stage/manage/news/edit-channel.jsp',
+                content: 'back/manage/news/edit-channel',
                 success: function (layero, index) {
                 }
             });
@@ -182,7 +182,7 @@
                 type: 2,
                 area: ['460px', '280px'],
                 title: ['添加栏目', 'font-size:18px;'],
-                content: 'back-stage/manage/news/add-channel.jsp',
+                content: 'back/manage/news/add-channel',
                 success: function (layero, index) {
                 }
             });

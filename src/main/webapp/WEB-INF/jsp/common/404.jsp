@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@include file="/common/common.jsp"%>
+<%@include file="/WEB-INF/jsp/common/common.jsp"%>
 <title>您访问的页面不存在</title>
 <link rel="stylesheet" href="res/css/error-css/common.css"/>
 <link rel="stylesheet" href="res/css/error-css/404.css">
@@ -15,7 +15,7 @@
 			<h4>很抱歉！没有找到您要访问的页面！</h4>
 			<p><span id="num">5</span> 秒后将自动跳转到首页</p>
 			<div>
-				<a href="front-desk/index.jsp" title="返回首页">返回首页</a>
+				<a href="/" title="返回首页">返回首页</a>
 				<a href="javascript:;" title="上一步" id="reload-btn">上一步</a>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 		$_num.html(num);
 		if(num===0){
 			//跳转地址写在这里
-			window.location.href="front-desk/index.jsp";
+			window.location.href="/";
 		}
 	},1000);
 	//返回按钮单击事件

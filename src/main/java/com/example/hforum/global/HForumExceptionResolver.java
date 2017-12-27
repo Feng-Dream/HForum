@@ -16,14 +16,14 @@ public class HForumExceptionResolver implements HandlerExceptionResolver {
         ModelAndView mv = new ModelAndView();
         if (ex instanceof UnauthorizedException) {
             // 没有权限异常
-            mv.setViewName("/common/403.jsp");
+            mv.setViewName("/common/403");
         } else if (ex instanceof GlobalException) {
             //自定义异常
             mv.addObject("message", ((GlobalException) ex).getMessage());
-        } /*else {
+        } else {
             //未知异常
-            mv.setViewName("/common/500.jsp");
-        }*/
+            mv.setViewName("/common/500");
+        }
         return mv;
     }
 

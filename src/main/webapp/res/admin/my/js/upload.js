@@ -153,7 +153,7 @@
             chunked: true,//是否要分片处理大文件上传。
             chunkSize: 512 * 1024,//如果要分片，分多大一片？ 默认大小为5M. 5242880
             //fileVal:'images',//此属性是你提交的图片的name属性值,如果不设置,系统默认值是'file'
-            server: 'image/uploadImages.action',//请求后台的入口
+            server: 'image/uploadImages',//请求后台的入口
             method: 'POST',
             // runtimeOrder: 'flash',
             // 只允许选择图片文件。

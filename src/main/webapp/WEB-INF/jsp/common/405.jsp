@@ -2,7 +2,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@include file="/common/common.jsp"%>
+<%@include file="/WEB-INF/jsp/common/common.jsp"%>
 <title>请求失败</title>
 <link rel="stylesheet" href="res/css/error-css/common.css"/>
 <link rel="stylesheet" href="res/css/error-css/405.css">

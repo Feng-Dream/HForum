@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>栏目排序</title>
-    <%@include file="/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link href="res/admin/my/css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css"  media="all">
     <script type="text/javascript" src="res/admin/my/js/script.js"></script>

@@ -3,7 +3,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/common/common.jsp"%>
+	<%@include file="/WEB-INF/jsp/common/common.jsp" %>
 <style type="text/css">
 	.login-page {
 	  width: 360px;
@@ -141,7 +141,7 @@
 			<div class="banner2"></div>			
 			<div class="title_logo"></div>		
 			<div class="version">
-				<a href="front-desk/index.jsp" target="_blank">前台首页</a>
+				<a href="/" target="_blank">前台首页</a>
 				<a href="javascript:;" target="_blank">问题反馈</a>
 				<a href="javascript:;" target="_blank">联系管理员</a>
 			</div>
@@ -149,7 +149,7 @@
 <div class="htmleaf-container" style="padding-top: 150px;">
 	<div id="wrapper" class="login-page">
 	  <div id="login_form" class="form">
-		<form class="login-form" action="user/login.action" method="post">
+		<form class="login-form" action="user/login" method="post">
 		<span class="input input--jiro" style="margin-top: 0;">
 				<input class="input__field input__field--jiro" type="text" id="input-10" name="userName"  style="color: #FFFFFF" />
 				<label class="input__label input__label--jiro" for="input-10">

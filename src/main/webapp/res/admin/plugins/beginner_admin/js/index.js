@@ -31,19 +31,13 @@ layui.config({
             //obj.url    -- 链接地址
             //obj.id     -- id
             //obj.tabId  -- lay-id
-            if (obj.title === 'BTable') {
-                layer.confirm('确定要关闭' + obj.title + '吗?', { icon: 3, title: '系统提示' }, function (index) {
+           if(obj.title==='添加新闻'){
+                layer.confirm('未保存的数据可能会丢失哦，确定要关闭吗?', { icon: 3, title: '系统提示' }, function (index) {
                     //因为confirm是非阻塞的，所以这里关闭当前tab需要调用一下deleteTab方法
                     tab.deleteTab(obj.tabId);
                     layer.close(index);
                 });
                 //返回true会直接关闭当前tab
-                return false;
-            }else if(obj.title==='表单'){
-                layer.confirm('未保存的数据可能会丢失哦，确定要关闭吗?', { icon: 3, title: '系统提示' }, function (index) {
-                    tab.deleteTab(obj.tabId);
-                    layer.close(index);
-                });
                 return false;
             }
             return true;

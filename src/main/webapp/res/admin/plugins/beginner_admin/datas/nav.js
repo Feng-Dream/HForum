@@ -6,16 +6,16 @@ var navs = [{
         {
             "title": "编辑新闻",
             "icon": "&#xe63c;",
-            "href": "back-stage/manage/news/news.jsp"
+            "href": "back/manage/news/news"
         },
 		{
 		"title": "栏目管理",
 		"icon": "&#xe641;",
-		"href": "back-stage/manage/news/channel.jsp"
+		"href": "back/manage/news/channel"
 	}, {
 		"title": "表格",
 		"icon": "&#xe63c;",
-		"href": "back-stage/manage/news/add-news.jsp"
+		"href": "back/manage/news/add-news"
 	}, {
 		"title": "导航",
 		"icon": "&#xe609;",
@@ -34,7 +34,7 @@ var navs = [{
         "children": [{
             "title": "用户管理",
             "icon": "&#xe612;",
-            "href": "back-stage/manage/system/user.jsp"
+            "href": "back/manage/system/user"
         }, {
             "title": "表单",
             "icon": "&#xe63c;",

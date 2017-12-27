@@ -27,7 +27,7 @@ $(document).ready(function() {
 			// iframe
 			$('.dialog').hDialog({
 				types : 2,
-				iframeSrc : 'front-desk/login.jsp',
+				iframeSrc : '/login',
 				iframeId : 'iframeHBox',
 				width : 600,
 				height : 420,

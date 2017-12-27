@@ -43,7 +43,7 @@ public class UserController {
 			}
 		}
 
-		return "redirect:/back-stage/manage/index.jsp";
+		return "redirect:/back/manage/index";
 	}
 
 	@RequestMapping(value = "/list")
@@ -63,7 +63,7 @@ public class UserController {
 		if (currentUser.isAuthenticated()) {
 			currentUser.logout();
 		}
-		return "redirect:/back-stage/login.jsp";
+		return "redirect:/back/login";
 	}
 
 }

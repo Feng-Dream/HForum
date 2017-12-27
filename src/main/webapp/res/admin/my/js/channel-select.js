@@ -3,7 +3,7 @@ $(function () {
     var channelData = {};
     $.ajax({
         type: "POST",
-        url: "channel/list.action",
+        url: "channel/list",
         async: false,
         data: {paginate: false},
         success: function (result) {

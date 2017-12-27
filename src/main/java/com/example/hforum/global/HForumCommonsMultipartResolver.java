@@ -17,7 +17,7 @@ public class HForumCommonsMultipartResolver extends CommonsMultipartResolver {
     @Override
     public boolean isMultipart(HttpServletRequest request) {
         String uri = request.getRequestURI();
-        if (uri.indexOf("ueditor/config.action") > 0) {
+        if (uri.indexOf("ueditor/config") > 0) {
             return false;//放行
         }
         return super.isMultipart(request);

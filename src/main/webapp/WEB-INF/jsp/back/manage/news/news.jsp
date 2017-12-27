@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>新闻管理</title>
-    <%@include file="/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
 </head>
 <body style="margin: 15px">
@@ -83,7 +83,7 @@
         var data = {
             "title": "添加新闻",
             "icon": "&#xe61f;",
-            "href": "back-stage/manage/news/add-news.jsp"
+            "href": "back/manage/news/add-news"
         }
         parent. tab.tabAdd(data);
     })

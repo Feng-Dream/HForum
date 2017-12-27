@@ -10,15 +10,15 @@
 <html>
 <head>
     <title>HForum后台管理</title>
-    <%@include file="/common/common.jsp" %>
-    <%@include file="/common/back-common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/back-common.jsp" %>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094;">
     <div class="layui-header header header-demo">
         <div class="layui-main">
             <div class="admin-login-box">
-                <a class="logo" style="left: 0;" href="http://beginner.zhengjinfan.cn/demo/beginner_admin/">
+                <a class="logo" style="left: 0;" href="/back">
                     <span style="font-size: 18px; color: #1AA094"><i>HForum后台管理系统</i></span>
                 </a>
                 <div class="admin-side-toggle">
@@ -33,7 +33,7 @@
                     <a href="javascript:;">系统消息</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="front-desk/index.jsp" target="_blank">浏览网站</a>
+                    <a href="/" target="_blank">浏览网站</a>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="admin-header-user">
@@ -81,16 +81,14 @@
 
             <div class="layui-tab-content" style="min-height: 150px; padding: 5px 0 0 0;">
                 <div class="layui-tab-item layui-show">
-                    <iframe src="back-stage/manage/welcome.jsp"></iframe>
+                    <iframe src="back/manage/welcome"></iframe>
                 </div>
             </div>
         </div>
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>2016 &copy;
-                <a href="http://m.zhengjinfan.cn/">m.zhengjinfan.cn/</a> LGPL license
-            </p>
+            <p>Copyright ©2017-2018 HForum All Rights Reserved.</p>
         </div>
     </div>
     <div class="site-tree-mobile layui-hide">

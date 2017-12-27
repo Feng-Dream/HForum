@@ -3,7 +3,7 @@
 <html>
 <head>
 <title></title>
-<%@include file="/common/common.jsp"%>
+	<%@include file="/WEB-INF/jsp/common/common.jsp" %>
 <link rel="stylesheet" type="text/css" href="res/css/login/base.css" />
 <link rel="stylesheet" type="text/css" href="res/css/login/app-all.css" />
 <link rel="stylesheet" type="text/css" href="res/css/login/blue.css" />

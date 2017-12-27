@@ -209,7 +209,7 @@ window.onload = function () {
     var aData1 = [];
     var aData2 = [];
     //生成数据
-    var url = "channel/list.action";
+    var url = "channel/list";
     var d = {paginate: false};
 
     $.ajax({
@@ -273,7 +273,7 @@ window.onload = function () {
         });
         $.ajax({
             type: "POST",
-            url: "channel/updatePostions.action",
+            url: "channel/updatePostions",
             async: false,
             data: JSON.stringify(channels),//@RequestBody接收的是一个json串,而不是json对象
             contentType: "application/json;charset=utf-8",

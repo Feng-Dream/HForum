@@ -10,8 +10,8 @@
 <html>
 <head>
     <title>用户管理</title>
-    <%@include file="/common/common.jsp" %>
-    <%@include file="/common/back-common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/back-common.jsp" %>
     <link rel="stylesheet" href="res/admin/plugins/beginner_admin/css/table.css"/>
 </head>
 <body>

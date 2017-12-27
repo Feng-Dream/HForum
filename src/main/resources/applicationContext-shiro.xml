@@ -71,9 +71,9 @@
 		IOC 容器中查找和 <filter-name> 名字对应的 filter bean. -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/back-stage/login.jsp" />
-		<property name="successUrl" value="/back-stage/manage/index.jsp" />
-        <property name="unauthorizedUrl" value="/common/403.jsp" ></property>
+		<property name="loginUrl" value="/back/login" />
+		<property name="successUrl" value="/back" />
+        <property name="unauthorizedUrl" value="/common/403" ></property>
 		<property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"></property> 
 	</bean>
 	

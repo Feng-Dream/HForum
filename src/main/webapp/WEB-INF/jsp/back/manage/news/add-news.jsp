@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <%@include file="/common/common.jsp" %>
+    <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/webuploader.css">
     <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/style.css">
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
