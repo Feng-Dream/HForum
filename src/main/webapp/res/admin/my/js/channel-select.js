@@ -27,6 +27,7 @@ $(function () {
              * UE.getEditor('editor');   //使用之前的对象
              */
             UE.getEditor('editor');//使用之前的对象
+
         }
     });
 

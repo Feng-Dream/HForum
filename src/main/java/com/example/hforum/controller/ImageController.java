@@ -23,8 +23,7 @@ public class ImageController {
     public String[] uploadImages(MultipartFile[] file, HttpServletRequest request) throws IOException {
         String[] fileNames = null;
         try {
-            WebuploaderUtil webuploaderUtil = new WebuploaderUtil();
-            fileNames = webuploaderUtil.uploads(file, "upload/news", request);
+            fileNames = WebuploaderUtil.uploads(file, "upload/news", request);
         } catch (Exception e) {
             e.printStackTrace();
         }
