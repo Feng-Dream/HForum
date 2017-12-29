@@ -13,8 +13,7 @@ public class ImageServiceImpl  implements ImageService{
     @Autowired
     private ImageMapper imageMapper;
     @Override
-    public  Integer[] uploadImages(Image image) {
-       // int insert = imageMapper.insert(image);
-        return null;
+    public  void add(Image image) {
+        imageMapper.insertSelective(image);
     }
 }

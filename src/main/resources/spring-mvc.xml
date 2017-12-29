@@ -62,5 +62,5 @@
     <!-- 静态资源映射 -->
     <mvc:resources location="/res/" mapping="/res/**"/>
     <!-- 文件上传资源 -->
-    <mvc:resources location="/upload/" mapping="/upload/**"/>
+    <mvc:resources location="/news/" mapping="/news/**"/>
 </beans>

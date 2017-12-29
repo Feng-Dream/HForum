@@ -1,5 +1,7 @@
 package com.example.hforum.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class News {
@@ -9,6 +11,7 @@ public class News {
 
     private String newsFrom;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     private Long createUserId;
@@ -16,6 +19,8 @@ public class News {
     private Date releaseTime;
 
     private Integer newsThumb;
+
+    private Boolean allowComment;
 
     private Boolean newsDelete;
 
@@ -77,6 +82,14 @@ public class News {
         this.newsThumb = newsThumb;
     }
 
+    public Boolean getAllowComment() {
+        return allowComment;
+    }
+
+    public void setAllowComment(Boolean allowComment) {
+        this.allowComment = allowComment;
+    }
+
     public Boolean getNewsDelete() {
         return newsDelete;
     }
@@ -91,5 +104,21 @@ public class News {
 
     public void setNewsContent(String newsContent) {
         this.newsContent = newsContent == null ? null : newsContent.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "newsId=" + newsId +
+                ", newsTitle='" + newsTitle + '\'' +
+                ", newsFrom='" + newsFrom + '\'' +
+                ", createTime=" + createTime +
+                ", createUserId=" + createUserId +
+                ", releaseTime=" + releaseTime +
+                ", newsThumb=" + newsThumb +
+                ", allowComment=" + allowComment +
+                ", newsDelete=" + newsDelete +
+                ", newsContent='" + newsContent + '\'' +
+                '}';
     }
 }

@@ -71,7 +71,8 @@
 <script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
 <script>
     layui.use('table', function () {
-        var loading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+        var loading = layer.load(0, { shade: [0.1,'#fff'] //0.1透明度的白色背景
+          }); //0代表加载的风格，支持0-2
         var channelName = "${param.channelName}";
         //发送到服务端的参数
         var url = "channel/list";

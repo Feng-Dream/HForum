@@ -75,16 +75,18 @@
             var channelName = data.field.channelName;
             if (!channelName || channelName.trim() == "") {
                 layer.alert("栏目名称不能为空", {
-                    title: '消息'
+                    title: '消息',
+                    icon:2
                 });
                 return false;
             }
-            var loading = layer.load(0, {shade: false}); //0代表加载的风格，支持0-2
+            var loading = layer.load(0, { shade: [0.1,'#fff'] //0.1透明度的白色背景
+               }); //0代表加载的风格，支持0-2
             $("#add").attr("disabled", true);
 
             $.ajax({
                 type: "POST",
-                url: "channel/add.action",
+                url: "channel/add",
                 async: false,
                 data: JSON.stringify(data.field),//@RequestBody接收的是一个json串,而不是json对象
                 contentType: "application/json;charset=utf-8",
@@ -93,7 +95,10 @@
                     layer.close(loading);
                     $("#add").attr("disabled", false);
                     if (result == 1) {
-                        parent.layer.msg("添加栏目成功");
+                        parent.layer.alert("添加栏目成功", {
+                            title: '消息',
+                            icon:1
+                        });
                         //当你在iframe页面关闭自身时
                         var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                         parent.layer.close(index); //再执行关闭
@@ -101,12 +106,14 @@
                     }
                     else if (result == 2) {
                         layer.alert("栏目名称已存在", {
-                            title: '消息'
+                            title: '消息',
+                            icon:2
                         });
                     }
                     else {
                         layer.alert("添加失败", {
-                            title: '消息'
+                            title: '消息',
+                            icon:2
                         });
                     }
                 }

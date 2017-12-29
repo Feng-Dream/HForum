@@ -63,4 +63,16 @@ public class Image implements Serializable{
     public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
     }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "imageId=" + imageId +
+                ", imageContent='" + imageContent + '\'' +
+                ", imageNewsId=" + imageNewsId +
+                ", uploadUserId=" + uploadUserId +
+                ", imageType=" + imageType +
+                ", uploadTime=" + uploadTime +
+                '}';
+    }
 }

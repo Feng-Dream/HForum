@@ -21,27 +21,27 @@ layui.config({
         onSwitch: function (data) {
             console.log(data.id); //当前Tab的Id
             console.log(data.index); //得到当前Tab的所在下标
-            console.log(data.elem); //得到当前的Tab大容器
+            console.log(data.elem); //得到当前的Tab大容器.
 
             console.log(tab.getCurrentTabId())
         },
-        closeBefore: function (obj) { //tab 关闭之前触发的事件
-            console.log(obj);
-            //obj.title  -- 标题
-            //obj.url    -- 链接地址
-            //obj.id     -- id
-            //obj.tabId  -- lay-id
-           if(obj.title==='添加新闻'){
-                layer.confirm('未保存的数据可能会丢失哦，确定要关闭吗?', { icon: 3, title: '系统提示' }, function (index) {
-                    //因为confirm是非阻塞的，所以这里关闭当前tab需要调用一下deleteTab方法
-                    tab.deleteTab(obj.tabId);
-                    layer.close(index);
-                });
-                //返回true会直接关闭当前tab
-                return false;
-            }
-            return true;
-        }
+        // closeBefore: function (obj) { //tab 关闭之前触发的事件
+        //     console.log(obj);
+        //     //obj.title  -- 标题
+        //     //obj.url    -- 链接地址
+        //     //obj.id     -- id
+        //     //obj.tabId  -- lay-id
+        //    if(obj.title==='添加新闻'){
+        //         layer.confirm('未保存的数据可能会丢失哦，确定要关闭吗?', { icon: 3, title: '系统提示' }, function (index) {
+        //             //因为confirm是非阻塞的，所以这里关闭当前tab需要调用一下deleteTab方法
+        //             tab.deleteTab(obj.tabId);
+        //             layer.close(index);
+        //         });
+        //         //返回true会直接关闭当前tab
+        //         return false;
+        //     }
+        //     return true;
+        // }
     });
     //iframe自适应
     $(window).on('resize', function () {

@@ -347,7 +347,7 @@
 </div>
 <script type="text/javascript" src="res/admin/plugins/uimaker/js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="res/admin/plugins/uimaker/js/echarts-all.js"></script>
-
+<script type="text/javascript" src="res/admin/plugins/uimaker/js/easyui-lang-zh_CN.js"></script>
 
 
 

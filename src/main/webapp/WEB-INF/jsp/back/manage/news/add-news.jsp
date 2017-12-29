@@ -31,7 +31,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label"><span style="color:#F00">*</span>文章标题</label>
         <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" lay-verify="required" , placeholder="请输入文章标题"
+            <input type="text" name="newsTitle" autocomplete="off" lay-verify="required" , placeholder="请输入文章标题"
                    class="layui-input">
         </div>
     </div>
@@ -39,7 +39,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label"><span style="color:#F00">*</span>文章来源</label>
         <div class="layui-input-block">
-            <input type="text" name="title" autocomplete="off" lay-verify="required" , placeholder="请输入文章来源"
+            <input type="text" name="newsFrom" autocomplete="off" lay-verify="required" , placeholder="请输入文章来源"
                    class="layui-input">
         </div>
     </div>
@@ -47,15 +47,15 @@
     <div class="layui-form-item">
         <label class="layui-form-label" style="width: 200px"><span style="color:#F00">*</span>分类栏目(最多可选3个)</label>
         <div class="layui-input-inline">
-            <select name="channelId" id="channel-1" lay-verify="required" lay-filter="channel-1">
+            <select name="channelId" id="channel-1" lay-filter="channel-1">
             </select>
         </div>
         <div class="layui-input-inline" style="display: none" id="channel-2-div">
-            <select name="channelId" id="channel-2" lay-filter="channel-2">
+            <select id="channel-2" lay-filter="channel-2">
             </select>
         </div>
         <div class="layui-input-inline" style="display: none" id="channel-3-div">
-            <select name="channelId" id="channel-3" lay-filter="channel-3">
+            <select id="channel-3" lay-filter="channel-3">
             </select>
         </div>
         <div class="layui-input-inline" id="add-channel-div">
@@ -66,7 +66,8 @@
     <div class="layui-form-item" pane="">
         <label class="layui-form-label">允许评论</label>
         <div class="layui-input-block">
-            <input type="checkbox" lay-text="开|关" checked="" name="open" lay-skin="switch" lay-filter="switchTest"
+            <input type="checkbox" lay-text="开|关" checked="" name="allowComment" lay-skin="switch"
+                   lay-filter="allowComment"
                    title="评论开关">
         </div>
     </div>
@@ -112,14 +113,11 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label"><span style="color:#F00">*</span>文章内容</label>
         <div class="layui-input-block">
-            <%-- <div class="layui-textarea">
-                 <script id="editor" type="text/plain" style="width:100%;height:500px;"></script>
-           </div>--%>
-            <textarea id="editor" class="layui-textarea" style="width:100%;height:100%;"></textarea>
+            <textarea id="editor" name="newsContent" class="layui-textarea" style="width:100%;height:100%;"></textarea>
         </div>
     </div>
     <div class="layui-form-item" style="float: right">
-        <button class="layui-btn" lay-submit="" lay-filter="demo1"><i class="layui-icon">&#xe622;</i>保存草稿</button>
+        <button class="layui-btn" lay-submit="" lay-filter="save"><i class="layui-icon">&#xe622;</i>保存草稿</button>
         <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo2"><i class="layui-icon">&#x1005;</i>保存并提交审核
         </button>
     </div>
@@ -127,13 +125,69 @@
 <script type="text/javascript" src="res/admin/plugins/webuploader-0.1.5/js/webuploader.js"></script>
 <script type="text/javascript" src="res/admin/my/js/upload.js"></script>
 <script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    function doSubmit(data, aduitResult) {
+        var newsPo = {
+            news: {},
+            newsRecord: {},
+            images: [],
+            channels: []
+        };
+        var channel = function (channelId) {
+            this.channelId = channelId;
+        }
+        var image = function (imageId) {
+            this.imageId = imageId;
+        }
+        var c1 = $("#channel-1").val();
+        var c2 = $("#channel-2").val();
+        var c3 = $("#channel-3").val();
+        if (c1 == "" || c1 == null) {
+            parent.layer.alert("请至少为新闻选择一个分类", {
+                title: '消息',
+                icon: 2
+            });
+            return null;
+        }
+        newsPo.channels[0] = new channel(c1);
+        if (c2 != "" && c2 != null) {
+            newsPo.channels[1] = new channel(c2);
+            if (c3 != "" && c3 != null) {
+                newsPo.channels[2] = new channel(c3);
+            }
+        }
+
+        if (data.field.allowComment == "on") {
+            newsPo.news.allowComment = true;
+        }
+        else {
+            newsPo.news.allowComment = false;
+        }
+        var imageIdInputs = $("input[name='imageIds']");
+        if (imageIdInputs != null) {
+            $.each(imageIdInputs, function () {
+                newsPo.images[newsPo.images.length] = new image($(this).val());
+            });
+        }
+
+        newsPo.news.newsTitle = data.field.newsTitle;
+        newsPo.news.newsFrom = data.field.newsFrom;
+        newsPo.news.newsContent = data.field.newsContent;
+        newsPo.news.createUserId = data.field.createUserId;
+
+        newsPo.newsRecord.aduitResult = aduitResult;//0编辑中 (草稿) 1审核中 2已发布 3已下架 4审核失败 5重新上架
+        newsPo.newsRecord.aduitNewsVersion = 1;
+
+        return newsPo;
+    }
+</script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form
-            , layer = layui.layer
+            , layer = layui.layer, element = layui.element;
 
         //监听指定开关
-        form.on('switch(switchTest)', function (data) {
+        form.on('switch(allowComment)', function (data) {
             if (this.checked) {
                 layer.tips('评论已开启', data.othis)
             }
@@ -143,10 +197,41 @@
         });
 
         //监听提交
-        form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
+        form.on('submit(save)', function (data) {
+            var newsPo = doSubmit(data, 0);
+            console.log(JSON.stringify(newsPo));
+            if (newsPo != null) {
+                var loading = parent.layer.load(0, {
+                    shade: [0.1, '#fff'] //0.1透明度的白色背景
+                }); //0代表加载的风格，支持0-2
+                $.ajax({
+                    type: "POST",
+                    url: "news/add",
+                    async: false,
+                    data: JSON.stringify(newsPo),//@RequestBody接收的是一个json串,而不是json对象
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+                        parent.layer.close(loading);
+                        if (result == 1) {
+                            // parent.layer.alert("保存成功", {
+                            //     title: '系统提示',
+                            //     icon: 1
+                            // });
+                            window.location.href = "back/manage/success";
+                        } else {
+
+                            parent.layer.alert("保存失败,请稍后重试", {
+                                title: '系统提示',
+                                icon: 2
+                            });
+                        }
+
+                    }
+                });
+            }
+
+
             return false;
         });
 
@@ -157,17 +242,18 @@
             if (data.value == "") {
                 $("#channel-2-div").hide();
                 $("#channel-3-div").hide();
+                $("#channel-2").val("");
+                $("#channel-3").val("");
                 $("#add-channel-div").show();
             }
         });
         form.on('select(channel-2)', function (data) {
             if (data.value == "") {
                 $("#channel-3-div").hide();
+                $("#channel-3").val("");
                 $("#add-channel-div").show();
             }
         });
-
-
     });
 </script>
 <script type="text/javascript" src="res/admin/my/js/channel-select.js"/>

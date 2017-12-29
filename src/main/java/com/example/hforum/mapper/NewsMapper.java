@@ -1,9 +1,12 @@
 package com.example.hforum.mapper;
 
 import com.example.hforum.model.News;
+import com.example.hforum.po.BridgePo;
+import com.example.hforum.po.NewsVo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface NewsMapper {
     int deleteByPrimaryKey(Long newsId);
 
@@ -19,5 +22,7 @@ public interface NewsMapper {
 
     int updateByPrimaryKey(News record);
 
-    List<News> list(News record);
+    List<NewsVo> list(NewsVo newsVo);
+
+    int insertNewsChannel(BridgePo bridgePo);
 }
