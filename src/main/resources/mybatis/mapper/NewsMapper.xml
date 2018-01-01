@@ -177,8 +177,8 @@
   </insert>
 
 
-
     <resultMap id="NewsVoResultMap" type="com.example.hforum.po.NewsVo">
+        <!-- 必须要按这里面的顺序写,不能随意打乱(constructor?,id*,result*,association*,collection*,discriminator?)-->
         <id column="news_id" jdbcType="BIGINT" property="news.newsId"/>
         <result column="news_title" jdbcType="VARCHAR" property="news.newsTitle"/>
         <result column="news_from" jdbcType="VARCHAR" property="news.newsFrom"/>
@@ -188,27 +188,44 @@
         <result column="news_thumb" jdbcType="INTEGER" property="news.newsThumb"/>
         <result column="allow_comment" jdbcType="BIT" property="news.allowComment"/>
         <result column="news_delete" jdbcType="BIT" property="news.newsDelete"/>
+        <result column="news_content" jdbcType="LONGVARCHAR" property="news.newsContent"/>
+        <association property="newsRecord"  resultMap="com.example.hforum.mapper.NewsRecordMapper.BaseResultMap" />
+
         <!-- 多对多关联映射：collection -->
         <collection property="channels" ofType="com.example.hforum.model.Channel">
             <id column="channel_id" jdbcType="BIGINT" property="channelId"/>
             <result column="channel_name" jdbcType="VARCHAR" property="channelName"/>
         </collection>
 
-       <!-- <collection property="images" ofType="com.example.hforum.model.Image">
+        <collection property="images" ofType="com.example.hforum.model.Image">
             <id column="image_id" jdbcType="BIGINT" property="imageId"/>
             <result column="image_content" jdbcType="VARCHAR" property="imageContent"/>
-        </collection>-->
+        </collection>
+
     </resultMap>
 
 
-    <select id="list" parameterType="com.example.hforum.po.NewsVo" resultMap="NewsVoResultMap">
-        select n.*,c.channel_id,c.channel_name
+    <select id="load" parameterType="java.lang.Long" resultMap="NewsVoResultMap">
+        select n.*,c.channel_id,c.channel_name,i.image_id,i.image_content,nr.*
         from news n
         left outer join news_channel nc
         on  n.news_id = nc.nid
         left outer join channel c
         on c.channel_id=nc.cid
-        where 1=1
-        order by   n.news_id desc
+        left outer join image i
+        on i.image_news_id=n.news_id
+        left outer join news_record nr
+        on nr.news_id= n.news_id
+        and nr.aduit_news_version =(SELECT MAX(aduit_news_version) FROM news_record where news_id =  #{newsId,jdbcType=BIGINT} )
+        where n.news_id =  #{newsId,jdbcType=BIGINT}
     </select>
+
+    <select id="list" parameterType="com.example.hforum.po.NewsVo" resultMap="BaseResultMap">
+        select n.* from news n
+    </select>
+
+    <delete id="deleteNewsChannelByNewsId" parameterType="java.lang.Long">
+        delete from news_channel
+        where nid = #{newsId,jdbcType=BIGINT}
+    </delete>
 </mapper>

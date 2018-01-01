@@ -23,6 +23,7 @@ import java.util.List;
 public class NewsServiceImpl implements NewsService {
     @Autowired
     private NewsMapper newsMapper;
+
     @Autowired
     private NewsRecordMapper newsRecordMapper;
     @Autowired
@@ -38,7 +39,11 @@ public class NewsServiceImpl implements NewsService {
         //新闻记录
         NewsRecord newsRecord = newsVo.getNewsRecord();
         newsRecord.setNewsId(news.getNewsId());
-        newsRecordMapper.insertSelective(newsRecord);
+        if (newsRecord.getAduitResult() == 1){
+            //直接送审
+            newsRecord.setForReviewTime(new Date());
+        }
+            newsRecordMapper.insertSelective(newsRecord);
 
         //关联新闻封面
         List<Image> images = newsVo.getImages();
@@ -57,14 +62,36 @@ public class NewsServiceImpl implements NewsService {
         //关联新闻类别
         for (Channel channel : newsVo.getChannels()
                 ) {
-            newsMapper.insertNewsChannel(new BridgePo(news.getNewsId(), channel.getChannelId()));
+            insertNewsChannel(new BridgePo(news.getNewsId(), channel.getChannelId()));
         }
         return i;
     }
 
+
     @Override
-    public List<NewsVo> list(NewsVo newsVo, PageBean pageBean) {
-        List<NewsVo> list = newsMapper.list(newsVo);
+    public List<News> list(NewsVo newsVo, PageBean pageBean) {
+        List<News> list = newsMapper.list(newsVo);
         return list;
     }
+
+    @Override
+    public NewsVo load(Long newsId) {
+        return newsMapper.load(newsId);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(News record) {
+        return newsMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int deleteNewsChannelByNewsId(Long newsId) {
+        return newsMapper.deleteNewsChannelByNewsId(newsId);
+    }
+
+    @Override
+    public void insertNewsChannel(BridgePo bridgePo) {
+        newsMapper.insertNewsChannel(bridgePo);
+    }
+
 }

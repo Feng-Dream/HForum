@@ -22,7 +22,7 @@
         width: 200px;
         height: 200px;
         position: relative;
-        margin: 100px auto;
+        margin: 80px auto;
         background: #00ED70;
         border-radius: 50%;
     }
@@ -125,7 +125,7 @@
             , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
         //模拟loading
         var n = 0, timer = setInterval(function () {
-            n = n + 1.3;
+            n = n + 1.35;
             if (n > 100) {
                 n = 100;
                 clearInterval(timer);

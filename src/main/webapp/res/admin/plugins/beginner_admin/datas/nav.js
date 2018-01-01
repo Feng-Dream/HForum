@@ -6,7 +6,7 @@ var navs = [{
         {
             "title": "编辑新闻",
             "icon": "&#xe63c;",
-            "href": "back/manage/news/news"
+            "href": "back/manage/news/news-list"
         },
 		{
 		"title": "栏目管理",

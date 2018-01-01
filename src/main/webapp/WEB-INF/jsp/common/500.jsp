@@ -14,6 +14,7 @@
 			<i class="icon" ></i>
 			<h4>系统繁忙</h4>
 			<p>非常抱歉服务器繁忙，请您稍后重试</p>
+			<p>错误:${message}</p>
 			<div>
 				<a href="javascript:window.history.back();" title="返回上一步" id="reload-btn">返回上一步</a>
 			</div>

@@ -139,4 +139,10 @@
       aduit_result = #{aduitResult,jdbcType=INTEGER}
     where news_record_id = #{newsRecordId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByNewsId" parameterType="java.lang.Long"  resultMap="BaseResultMap">
+    SELECT * FROM news_record
+    where news_id = #{newsId,jdbcType=BIGINT}
+    ORDER BY aduit_news_version DESC LIMIT 1
+  </select>
 </mapper>

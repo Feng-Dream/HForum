@@ -16,4 +16,6 @@ public interface NewsRecordMapper {
     int updateByPrimaryKeySelective(NewsRecord record);
 
     int updateByPrimaryKey(NewsRecord record);
+
+    NewsRecord selectByNewsId(Long newsId);
 }

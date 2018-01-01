@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ImageServiceImpl  implements ImageService{
@@ -16,4 +18,11 @@ public class ImageServiceImpl  implements ImageService{
     public  void add(Image image) {
         imageMapper.insertSelective(image);
     }
+
+    @Override
+    public List<Image> selectByNewsId(Long newsId) {
+        return imageMapper.selectByNewsId(newsId);
+    }
+
+
 }

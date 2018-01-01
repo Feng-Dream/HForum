@@ -1,5 +1,6 @@
 package com.example.hforum.service.impl;
 
+import com.example.hforum.model.News;
 import com.example.hforum.po.NewsVo;
 import com.example.hforum.service.NewsService;
 import com.example.hforum.utils.PageBean;
@@ -26,10 +27,19 @@ public class NewsServiceImplTest {
     @Test
     public void list() {
         PageBean pageBean = new PageBean();
-        List<NewsVo> list = newsService.list(new NewsVo(), pageBean);
-        for (NewsVo v:
+        pageBean.setCurPage(2);
+        pageBean.setPageRecord(1);
+        List<News> list = newsService.list(new NewsVo(), pageBean);
+        for (News v:
                 list) {
             System.out.println(v);
         }
+    }
+
+
+    @Test
+    public void load() {
+        NewsVo newsVo = newsService.load((long) 9);
+        System.out.println(newsVo);
     }
 }

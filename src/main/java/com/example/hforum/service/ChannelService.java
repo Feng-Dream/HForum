@@ -16,4 +16,6 @@ public interface ChannelService {
     int selectMaxPostion(Channel channel);
 
     List<Channel> selectBackChannel(Channel record);
+
+    List<Channel> selectByNewsId(Long newsId);
 }

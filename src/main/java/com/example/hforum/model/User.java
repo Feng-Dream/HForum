@@ -26,6 +26,16 @@ public class User {
 	// 一个用户有多个角色
 	Set<Role> setRole = new HashSet<>();
 
+	private Integer loginType;
+
+	public Integer getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(Integer loginType) {
+		this.loginType = loginType;
+	}
+
 	public Set<Role> getSetRole() {
 		return setRole;
 	}

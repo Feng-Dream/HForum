@@ -65,4 +65,9 @@ public class ChannelServiceImpl implements ChannelService {
     public List<Channel> selectBackChannel(Channel record) {
         return channelMapper.selectBackChannel(record);
     }
+
+    @Override
+    public List<Channel> selectByNewsId(Long newsId) {
+        return channelMapper.selectByNewsId(newsId);
+    }
 }

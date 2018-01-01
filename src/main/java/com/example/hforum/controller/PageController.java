@@ -17,6 +17,14 @@ public class PageController {
         return "front/" + page;
     }
 
+    @RequestMapping("/{dir}/{page}")
+    public String toFrontDirPage(@PathVariable String dir, @PathVariable String page) {
+        if("u".equals(dir)){
+            return "front/user/" + page;
+        }
+        return "front/" +dir + "/" + page;
+    }
+
     //后台路径访问控制
     @RequestMapping("/back")
     public String toAdminWelcomePage() {

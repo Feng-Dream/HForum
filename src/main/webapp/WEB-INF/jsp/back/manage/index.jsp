@@ -11,7 +11,9 @@
 <head>
     <title>HForum后台管理</title>
     <%@include file="/WEB-INF/jsp/common/common.jsp" %>
-    <%@include file="/WEB-INF/jsp/common/back-common.jsp" %>
+    <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
+    <link rel="stylesheet" href="res/admin/plugins/beginner_admin/css/global.css" media="all">
+    <link rel="stylesheet" href="res/admin/plugins/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 <div class="layui-layout layui-layout-admin" style="border-bottom: solid 5px #1aa094;">
@@ -21,15 +23,15 @@
                 <a class="logo" style="left: 0;" href="/back">
                     <span style="font-size: 18px; color: #1AA094"><i>HForum后台管理系统</i></span>
                 </a>
-                <div class="admin-side-toggle">
+                <div class="admin-side-toggle" title="收起侧边栏">
                     <i class="fa fa-bars" aria-hidden="true" style="margin-top: 7px;"></i>
                 </div>
-                <div class="admin-side-full">
+                <div class="admin-side-full" title="全屏模式">
                     <i class="fa fa-life-bouy" aria-hidden="true" style="margin-top: 7px;"></i>
                 </div>
             </div>
             <ul class="layui-nav admin-header-item">
-                <li class="layui-nav-item" id="pay">
+                <li class="layui-nav-item" id="systemMsg">
                     <a href="javascript:;">系统消息</a>
                 </li>
                 <li class="layui-nav-item">
@@ -39,6 +41,7 @@
                     <a href="javascript:;" class="admin-header-user">
                         <img src="res/admin/my/images/admin.png"/>
                         <span><shiro:principal property="userName"/></span>
+                        <span style="display: none" id="userId"><shiro:principal property="userId"/></span>
                     </a>
                     <dl class="layui-nav-child">
                         <dd>

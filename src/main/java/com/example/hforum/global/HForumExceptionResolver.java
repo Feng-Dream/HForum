@@ -22,7 +22,8 @@ public class HForumExceptionResolver implements HandlerExceptionResolver {
             mv.addObject("message", ((HForumException) ex).getMessage());
         } else {
             //未知异常
-            mv.setViewName("/common/500");
+            mv.addObject("message", ex.getMessage());
+         //   mv.setViewName("/common/500");
         }
         return mv;
     }

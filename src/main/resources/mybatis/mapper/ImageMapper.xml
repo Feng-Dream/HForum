@@ -109,4 +109,10 @@ useGeneratedKeys表示主键id为自增长模式。mysql的话只要加上这两
       upload_time = #{uploadTime,jdbcType=TIMESTAMP}
     where image_id = #{imageId,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByNewsId" parameterType="java.lang.Long"  resultMap="BaseResultMap">
+    select i.*
+    from image i
+    where i.image_news_id= #{newsId,jdbcType=BIGINT}
+  </select>
 </mapper>

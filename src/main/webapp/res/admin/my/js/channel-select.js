@@ -1,4 +1,5 @@
 $(function () {
+
     //生成下拉框数据
     var channelData = {};
     $.ajax({
@@ -31,8 +32,8 @@ $(function () {
         }
     });
 
-    function createOption(obj, disabledOptions,initText) {
-        var options = "<option value=''>"+initText+"</option>";
+    function createOption(obj, disabledOptions, initText, selectOption) {
+        var options = "<option value=''>" + initText + "</option>";
         $.each(channelData, function (i) {
             if (this.channelId == 1 || this.channelId == 2) {
                 //去掉推荐和热点
@@ -41,7 +42,12 @@ $(function () {
             // $.inArray(ele.arr);判断数组是否包含某个元素 返回-1表示不包含 包含则返回元素下标
             var index = $.inArray(this.channelId, disabledOptions);
             if (index == -1) {
-                options += "<option  value=" + this.channelId + ">" + this.channelName + "</option>";
+                if (selectOption != null && this.channelId == selectOption) {
+                    options += "<option selected  value=" + this.channelId + ">" + this.channelName + "</option>";
+                }
+                else {
+                    options += "<option  value=" + this.channelId + ">" + this.channelName + "</option>";
+                }
             }
             else {
                 options += "<option disabled value=" + this.channelId + ">" + this.channelName + "</option>";
@@ -51,7 +57,30 @@ $(function () {
         obj.html(options);
     }
 
-    createOption($("#channel-1"),[],'请选择分类一');
+
+    var cs = $("input[name='channelIds']");
+    var chids = [];
+    if (cs != null) {
+        $.each(cs, function (index) {
+            chids[index] = $(this).val();
+        });
+    }
+
+    if (chids.length != 0) {
+        createOption($("#channel-1"), [], '请选择分类一', chids[0]);
+        if (cs.length > 1) {
+            createOption($("#channel-2"), [parseInt(chids[0])], '请选择分类二', chids[1]);
+            $("#channel-2-div").show();
+        }
+        if (cs.length > 2) {
+            createOption($("#channel-3"), [parseInt(chids[0]), parseInt(chids[1])], '请选择分类三', chids[2]);
+            $("#channel-3-div").show();
+            $("#add-channel-div").hide();
+        }
+    }
+    else {
+        createOption($("#channel-1"), [], '请选择分类一', null);
+    }
 
 
     $("#add-channel").click(function () {
@@ -68,7 +97,7 @@ $(function () {
             });
         }
         else if (c2 == "none") {
-            createOption($("#channel-2"),[parseInt(v1)],'请选择分类二');
+            createOption($("#channel-2"), [parseInt(v1)], '请选择分类二', null);
             //重新渲染
             // form.render();
             form.render('select');
@@ -84,7 +113,7 @@ $(function () {
             });
         }
         else if (c3 == "none") {
-            createOption($("#channel-3"),[parseInt(v1),parseInt(v2)],'请选择分类三');
+            createOption($("#channel-3"), [parseInt(v1), parseInt(v2)], '请选择分类三', null);
             //重新渲染
             form.render('select');
             $("#channel-3-div").show();

@@ -123,4 +123,12 @@
        (select position from channel where channel_id = #{channelId,jdbcType=INTEGER})
         and selected = #{selected,jdbcType=BIT}
     </select>
+
+    <select id="selectByNewsId" parameterType="java.lang.Long"  resultMap="BaseResultMap">
+        select c.channel_name
+        from channel c
+        inner join news_channel nc
+        on c.channel_id=nc.cid
+        and nc.nid = #{newsId,jdbcType=BIGINT}
+    </select>
 </mapper>

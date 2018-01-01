@@ -12,8 +12,9 @@
     <%@include file="/WEB-INF/jsp/common/common.jsp" %>
     <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/webuploader.css">
     <link rel="stylesheet" type="text/css" href="res/admin/plugins/webuploader-0.1.5/css/style.css">
+    <link rel="stylesheet" type="text/css" href="res/admin/plugins/loading/css/loading.css">
     <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
-
+    <script type="text/javascript" charset="utf-8" src="res/admin/plugins/loading/js/loading.js"></script>
     <script type="text/javascript" charset="utf-8" src="res/admin/plugins/ueditor-1.4.3.3/ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="res/admin/plugins/ueditor-1.4.3.3/ueditor.all.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -73,7 +74,7 @@
     </div>
 
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">&nbsp;&nbsp;&nbsp;文章封面(最多上传4张封面)</label>
+        <label class="layui-form-label">&nbsp;&nbsp;&nbsp;文章封面(最多上传4张封面,上传后不可更改)</label>
         <div class="layui-input-block">
             <%--     <div id="wrapper"  class="layui-textarea">
                      <div id="container">--%>
@@ -118,7 +119,7 @@
     </div>
     <div class="layui-form-item" style="float: right">
         <button class="layui-btn" lay-submit="" lay-filter="save"><i class="layui-icon">&#xe622;</i>保存草稿</button>
-        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="demo2"><i class="layui-icon">&#x1005;</i>保存并提交审核
+        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="saveAndSubmit"><i class="layui-icon">&#x1005;</i>保存并提交审核
         </button>
     </div>
 </form>
@@ -127,61 +128,135 @@
 <script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
 <script type="text/javascript">
     function doSubmit(data, aduitResult) {
-        var newsPo = {
-            news: {},
-            newsRecord: {},
-            images: [],
-            channels: []
-        };
-        var channel = function (channelId) {
-            this.channelId = channelId;
-        }
-        var image = function (imageId) {
-            this.imageId = imageId;
-        }
         var c1 = $("#channel-1").val();
-        var c2 = $("#channel-2").val();
-        var c3 = $("#channel-3").val();
         if (c1 == "" || c1 == null) {
             parent.layer.alert("请至少为新闻选择一个分类", {
                 title: '消息',
                 icon: 2
             });
-            return null;
+            return false;
         }
-        newsPo.channels[0] = new channel(c1);
-        if (c2 != "" && c2 != null) {
-            newsPo.channels[1] = new channel(c2);
-            if (c3 != "" && c3 != null) {
-                newsPo.channels[2] = new channel(c3);
+     if(aduitResult==0){
+         $("body").loading({
+             loadingWidth:220,
+             title:'正在为您保存新闻',
+             name:'submitLoading',
+             titleColor:'#FFFFFF',
+             discColor:'#FFFFFF',
+             discription:'请稍候...',
+             direction:'column',
+             type:'origin',
+             originBg:'#FFFFFF',
+             originDivWidth:40,
+             originDivHeight:40,
+             originWidth:6,
+             originHeight:6,
+             smallLoading:false,
+             loadingBg:'rgba(0,0,0,0.4)',
+             loadingMaskBg:'rgba(66,66,66,0.2)'
+         });
+     }
+     else{
+         $('body').loading({
+             loadingWidth:240,
+             title:'正在提交审核...',
+             name:'submitLoading',
+             direction:'row',
+             type:'origin',
+             originBg:'#71EA71',
+             originDivWidth:30,
+             originDivHeight:30,
+             originWidth:4,
+             originHeight:4,
+             smallLoading:false,
+             titleColor:'#388E7A',
+             loadingBg:'#312923',
+             loadingMaskBg:'rgba(22,22,22,0.2)'
+         });
+     }
+
+        setTimeout(function(){
+
+            var newsPo = {
+                news: {},
+                newsRecord: {},
+                images: [],
+                channels: []
+            };
+            var channel = function (channelId) {
+                this.channelId = channelId;
             }
-        }
+            var image = function (imageId) {
+                this.imageId = imageId;
+            }
 
-        if (data.field.allowComment == "on") {
-            newsPo.news.allowComment = true;
-        }
-        else {
-            newsPo.news.allowComment = false;
-        }
-        var imageIdInputs = $("input[name='imageIds']");
-        if (imageIdInputs != null) {
-            $.each(imageIdInputs, function () {
-                newsPo.images[newsPo.images.length] = new image($(this).val());
+            var c2 = $("#channel-2").val();
+            var c3 = $("#channel-3").val();
+
+            newsPo.channels[0] = new channel(c1);
+            if (c2 != "" && c2 != null) {
+                newsPo.channels[1] = new channel(c2);
+                if (c3 != "" && c3 != null) {
+                    newsPo.channels[2] = new channel(c3);
+                }
+            }
+
+            if (data.field.allowComment == "on") {
+                newsPo.news.allowComment = true;
+            }
+            else {
+                newsPo.news.allowComment = false;
+            }
+            var imageIdInputs = $("input[name='imageIds']");
+            if (imageIdInputs != null) {
+                $.each(imageIdInputs, function () {
+                    newsPo.images[newsPo.images.length] = new image($(this).val());
+                });
+            }
+
+            newsPo.news.newsTitle = data.field.newsTitle;
+            newsPo.news.newsFrom = data.field.newsFrom;
+            newsPo.news.newsContent = data.field.newsContent;
+            newsPo.news.createUserId = data.field.createUserId;
+
+            newsPo.newsRecord.aduitResult = aduitResult;//0编辑中 (草稿) 1审核中 2已发布 3已下架 4审核失败 5重新上架
+            newsPo.newsRecord.aduitNewsVersion = 1;
+
+
+            $.ajax({
+                type: "POST",
+                url: "news/add",
+                async: false,
+                data: JSON.stringify(newsPo),//@RequestBody接收的是一个json串,而不是json对象
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    // removeLoading('submitLoading');
+                    if (result == 1) {
+                        window.location.href = "back/manage/success";
+                    } else {
+                        parent.layer.alert("操作失败,请稍后重试", {
+                            title: '系统提示',
+                            icon: 2
+                        });
+                    }
+
+                }
             });
-        }
 
-        newsPo.news.newsTitle = data.field.newsTitle;
-        newsPo.news.newsFrom = data.field.newsFrom;
-        newsPo.news.newsContent = data.field.newsContent;
-        newsPo.news.createUserId = data.field.createUserId;
+        },3000);
 
-        newsPo.newsRecord.aduitResult = aduitResult;//0编辑中 (草稿) 1审核中 2已发布 3已下架 4审核失败 5重新上架
-        newsPo.newsRecord.aduitNewsVersion = 1;
 
-        return newsPo;
     }
 </script>
 <script>
+    function resetSelect() {
+        $("#channel-2-div").hide();
+        $("#channel-3-div").hide();
+        $("#channel-2").val("");
+        $("#channel-3").val("");
+        $("#add-channel-div").show();
+    }
     layui.use(['form'], function () {
         var form = layui.form
             , layer = layui.layer, element = layui.element;
@@ -198,57 +273,40 @@
 
         //监听提交
         form.on('submit(save)', function (data) {
-            var newsPo = doSubmit(data, 0);
-            console.log(JSON.stringify(newsPo));
-            if (newsPo != null) {
-                var loading = parent.layer.load(0, {
-                    shade: [0.1, '#fff'] //0.1透明度的白色背景
-                }); //0代表加载的风格，支持0-2
-                $.ajax({
-                    type: "POST",
-                    url: "news/add",
-                    async: false,
-                    data: JSON.stringify(newsPo),//@RequestBody接收的是一个json串,而不是json对象
-                    contentType: "application/json;charset=utf-8",
-                    dataType: "json",
-                    success: function (result) {
-                        parent.layer.close(loading);
-                        if (result == 1) {
-                            // parent.layer.alert("保存成功", {
-                            //     title: '系统提示',
-                            //     icon: 1
-                            // });
-                            window.location.href = "back/manage/success";
-                        } else {
-
-                            parent.layer.alert("保存失败,请稍后重试", {
-                                title: '系统提示',
-                                icon: 2
-                            });
-                        }
-
-                    }
-                });
-            }
-
-
+            doSubmit(data, 0);
             return false;
         });
+        form.on('submit(saveAndSubmit)', function (data) {
+            doSubmit(data, 1);
+            return false;
+        });
+
 
         form.on('select(channel-1)', function (data) {
             // console.log(data.elem); //得到select原始DOM对象
             // console.log(data.value); //得到被选中的值
             // console.log(data.othis); //得到美化后的DOM对象
             if (data.value == "") {
-                $("#channel-2-div").hide();
-                $("#channel-3-div").hide();
-                $("#channel-2").val("");
-                $("#channel-3").val("");
-                $("#add-channel-div").show();
+                resetSelect();
+            }else if(data.value==$("#channel-2").val()||data.value==$("#channel-3").val()){
+                parent.layer.alert("您已重复选择分类", {
+                    title: '警告',
+                    icon: 0
+                });
+                resetSelect();
             }
         });
         form.on('select(channel-2)', function (data) {
             if (data.value == "") {
+                $("#channel-3-div").hide();
+                $("#channel-3").val("");
+                $("#add-channel-div").show();
+            }
+            else if(data.value==$("#channel-3").val()){
+                parent.layer.alert("您已重复选择分类", {
+                    title: '警告',
+                    icon: 0
+                });
                 $("#channel-3-div").hide();
                 $("#channel-3").val("");
                 $("#add-channel-div").show();

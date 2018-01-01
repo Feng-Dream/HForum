@@ -23,4 +23,8 @@ public class EncodeUtil {
 		SimpleHash simpleHash = new SimpleHash(ALGORITHMNAME, source, ByteSource.Util.bytes(credentialsSalt), HASHITERATIONS);
 		return  simpleHash.toString();
 	}
+
+	public static void main(String[] args) {
+		System.out.println(hashEcode("123456", 205+""));
+	}
 }

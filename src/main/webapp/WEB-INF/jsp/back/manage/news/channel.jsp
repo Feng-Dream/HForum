@@ -11,7 +11,7 @@
 <head>
     <title>栏目管理</title>
     <%@include file="/WEB-INF/jsp/common/common.jsp" %>
-    <link rel="stylesheet" href="res/admin/plugins/layui-v2.2.45/css/layui.css" media="all">
+    <%@include file="/WEB-INF/jsp/common/admin-header.jsp" %>
 </head>
 <body style="margin: 15px">
 <div class="admin-main">
@@ -68,11 +68,10 @@
             删除</a>
     </script>
 </div>
-<script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
 <script>
     layui.use('table', function () {
-        var loading = layer.load(0, { shade: [0.1,'#fff'] //0.1透明度的白色背景
-          }); //0代表加载的风格，支持0-2
+        var loading = layer.load(0, { shade: [0.3,'#FFFFFF']
+        }); //0代表加载的风格，支持0-2
         var channelName = "${param.channelName}";
         //发送到服务端的参数
         var url = "channel/list";

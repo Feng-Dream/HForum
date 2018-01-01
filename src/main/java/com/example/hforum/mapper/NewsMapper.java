@@ -22,7 +22,11 @@ public interface NewsMapper {
 
     int updateByPrimaryKey(News record);
 
-    List<NewsVo> list(NewsVo newsVo);
+    List<News> list(NewsVo newsVo);
+
+    NewsVo load(Long newsId);
 
     int insertNewsChannel(BridgePo bridgePo);
+
+    int deleteNewsChannelByNewsId(Long newsId);
 }

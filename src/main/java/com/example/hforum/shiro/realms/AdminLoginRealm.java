@@ -1,4 +1,4 @@
-package com.example.hforum.realms;
+package com.example.hforum.shiro.realms;
 
 import com.example.hforum.model.LoginRecord;
 import com.example.hforum.model.Role;
@@ -29,7 +29,7 @@ import java.util.Set;
  * doGetAuthenticationInfo, 所以认证和授权只需要继承 AuthorizingRealm 就可以了. 同时实现他的两个抽象方法.
  *
  */
-public class LoginRealm extends AuthorizingRealm {
+public class AdminLoginRealm extends AuthorizingRealm {
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -52,6 +52,8 @@ public class LoginRealm extends AuthorizingRealm {
 			u.setEmail(username);
 		}
 		User user = userService.login(u);
+		//登录后台
+		user.setLoginType(2);
 
 		// 4. 若用户不存在, 则可以抛出 UnknownAccountException 异常
 		if (user == null) {

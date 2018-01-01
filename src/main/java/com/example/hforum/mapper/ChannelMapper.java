@@ -27,4 +27,6 @@ public interface ChannelMapper {
 
     //查询排序在该栏目后面的栏目
     List<Channel> selectBackChannel(Channel record);
+
+    List<Channel> selectByNewsId(Long newsId);
 }

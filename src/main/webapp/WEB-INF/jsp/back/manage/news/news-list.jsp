@@ -56,49 +56,93 @@
             </script>
             <script type="text/html" id="channelNames">
                 {{# layui.each(d.channels,function(index,item) {  }}
-                      <span class="label label-success radius">{{ item.channelName }}</span>
+                <span class="label label-success radius">{{ item.channelName }}</span>
                 {{#  });  }}
             </script>
 
             <script type="text/html" id="allowComment">
-
-                <input type="checkbox" name="allowComment" value="{{d.news.allowComment}}" lay-skin="switch" lay-text="开|关"
-                       lay-filter="allowComment"  {{ d.news.allowComment== true ? 'checked' : '' }}>
+                {{#  if(d.news.allowComment) {  }}
+                <span class="label label-success radius" style="margin-top: 4px;">开</span>
+                {{# } else{ }}
+                <span class="label radius" style="margin-top: 4px;">关</span>
+                {{# } }}
+            </script>
+            <script type="text/html" id="aduitResult">
+                {{#  if(d.newsRecord.aduitResult == 0) {  }}
+                <span class="label label-editing radius" style="margin-top: 4px;">编辑中</span>
+                {{# } else if(d.newsRecord.aduitResult == 1) { }}
+                <span class="label label-aduiting radius" style="margin-top: 4px;">审核中</span>
+                {{# } }}
+            </script>
+            <script type="text/html" id="toolbar">
+                {{#  if(d.newsRecord.aduitResult == 0) {  }}
+                <a class="layui-btn layui-btn-xs" lay-event="edit">
+                    <i class="layui-icon" style="color: #FFFFFF;">&#xe642;</i>
+                    编辑</a>
+                {{# } }}
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">
+                    <i class="layui-icon" style="color: #FFFFFF;">&#xe640;</i>
+                    删除</a>
             </script>
             <table class="layui-hide" id="newsTable" lay-filter="newsTable">
             </table>
         </div>
 
     </fieldset>
-    <script type="text/html" id="toolbar">
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon"
-                                                                              style="font-size: 30px; color: #FFFFFF;">&#xe640;</i>
-            删除</a>
-    </script>
+
 </div>
 <script src="res/admin/plugins/layui-v2.2.45/layui.js" charset="utf-8"></script>
 <script>
     layui.use('table', function () {
+        var loading = layer.load(0, { shade: [0.3,'#FFFFFF']
+        }); //0代表加载的风格，支持0-2
         var table = layui.table
             , form = layui.form;
         table.render({
             elem: '#newsTable'
             , url: "news/list",
             cols: [[
-                 {type: 'checkbox'},
-                 {type: 'numbers'},
-                 {
-                   field: 'newsTitle', align: 'center', title: '新闻标题', templet: '#newsTitle', unresize: true}
+                {type: 'checkbox'},
+                {type: 'numbers'},
+                {
+                    field: 'newsTitle', align: 'center', title: '新闻标题', templet: '#newsTitle', unresize: true
+                }
                 , {field: 'newsFrom', align: 'center', title: '来源', templet: '#newsFrom', unresize: true}
-                , {field: 'createTime', align: 'center', title: '创建时间', sort: true, templet: '#createTime', unresize: true}
+                , {
+                    field: 'createTime',
+                    align: 'center',
+                    title: '创建时间',
+                    sort: true,
+                    templet: '#createTime',
+                    unresize: true
+                }
                 , {field: 'channelNames', align: 'center', title: '新闻类别', templet: '#channelNames', unresize: true}
-                , {field: 'allowComment', align: 'center', title: '评论', templet: '#allowComment', unresize: true}
-                , {fixed: 'right', title: '操作', align: 'center', toolbar: '#toolbar'
-            }
+                , {field: 'allowComment', align: 'center', title: '评论', templet: '#allowComment',width:90}
+                , {field: 'aduitResult', align: 'center', title: '状态', templet: '#aduitResult', width:90}
+                , {
+                    fixed: 'right', title: '操作', align: 'center', toolbar: '#toolbar'
+                }
             ]]
-            ,   page: {
+            , page: {
                 limit: 4,
                 limits: [4, 8, 16]
+            }
+            ,
+            done: function(res, curr, count){
+                layer.close(loading);
+            }
+        });
+        //监听工具条
+        table.on('tool(newsTable)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'edit'){
+                var href = "back/manage/news/edit-news?newsId=" +data.news.newsId
+                var newTabData = {
+                    "title": data.news.newsTitle,
+                    "icon": "&#xe642;",
+                    "href": href
+                }
+                parent.tab.tabAdd(newTabData);
             }
         });
     });
@@ -109,8 +153,10 @@
             "icon": "&#xe61f;",
             "href": "back/manage/news/add-news"
         }
-        parent. tab.tabAdd(data);
-    })
+        parent.tab.tabAdd(data);
+    });
+
+
 </script>
 
 </body>

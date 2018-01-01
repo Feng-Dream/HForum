@@ -96,13 +96,17 @@
                     $("#add").attr("disabled", false);
                     if (result == 1) {
                         parent.layer.alert("添加栏目成功", {
+                            skin:'layui-layer-molv',
                             title: '消息',
-                            icon:1
+                            icon:1,
+                            yes:function () {
+                                //当你在iframe页面关闭自身时
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index); //再执行关闭
+                                parent.location.reload();
+                            }
                         });
-                        //当你在iframe页面关闭自身时
-                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        parent.layer.close(index); //再执行关闭
-                        parent.location.reload();
+
                     }
                     else if (result == 2) {
                         layer.alert("栏目名称已存在", {
