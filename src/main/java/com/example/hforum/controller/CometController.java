@@ -29,7 +29,7 @@ public class CometController {
         // 开始请求的挂起
         AsyncContext context = request.startAsync();
         context.setTimeout(0);
-        //把异步上下文放在列表中以被将来只用
+        //把异步上下文放在列表中以被将来调用
         CONNECTIONS.offer(context);
     }
 }
