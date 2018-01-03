@@ -88,7 +88,7 @@ public class AdminLoginRealm extends AuthorizingRealm {
 		Set<Role> roles = user.getSetRole();
 		Set<String> roleNames = new HashSet<>();
 		for (Role role : roles) {
-			roleNames.add(role.getRoleName());
+			roleNames.add(role.getRoleType());
 		}
 		// 登录记录
 		LoginRecord loginRecord = new LoginRecord();

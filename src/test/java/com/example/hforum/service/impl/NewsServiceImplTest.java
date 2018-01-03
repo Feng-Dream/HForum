@@ -27,9 +27,12 @@ public class NewsServiceImplTest {
     @Test
     public void list() {
         PageBean pageBean = new PageBean();
-        pageBean.setCurPage(2);
-        pageBean.setPageRecord(1);
-        List<News> list = newsService.list(new NewsVo(), pageBean);
+        pageBean.setCurPage(1);
+        pageBean.setPageRecord(6);
+        NewsVo newsVo = new NewsVo();
+       // newsVo.setChannelId(13);
+        newsVo.setAduitResult(0);
+        List<News> list = newsService.list(newsVo, pageBean);
         for (News v:
                 list) {
             System.out.println(v);

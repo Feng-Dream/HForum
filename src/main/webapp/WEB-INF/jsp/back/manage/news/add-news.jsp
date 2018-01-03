@@ -231,7 +231,7 @@
                 contentType: "application/json;charset=utf-8",
                 dataType: "json",
                 success: function (result) {
-                    // removeLoading('submitLoading');
+                    removeLoading('submitLoading');
                     if (result == 1) {
                         window.location.href = "back/manage/success";
                     } else {

@@ -91,7 +91,7 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>Copyright ©2017-2018 HForum All Rights Reserved.</p>
+            <p><i  class="layui-icon" style="font-size: 17px; color: #1E9FFF;">&#xe60b;</i> Copyright ©2017-2018 HForum All Rights Reserved.</p>
         </div>
     </div>
     <div class="site-tree-mobile layui-hide">

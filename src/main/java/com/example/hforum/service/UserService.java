@@ -10,5 +10,7 @@ public interface UserService {
 
 	public User login(User user);
 
+	public User selectByPrimaryKey(Long userId);
+
 	public List<User> list(User user,PageBean pageBean);
 }

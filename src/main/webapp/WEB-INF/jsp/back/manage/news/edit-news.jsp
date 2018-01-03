@@ -24,7 +24,7 @@
 </head>
 <body style="margin: 15px;">
 <c:if test="${editNewsVo==null}">
-    <c:redirect url="/news/load/${param.newsId}"/>
+    <c:redirect url="/news/load/editNews/${param.newsId}"/>
 </c:if>
 <fieldset class="layui-elem-field layui-field-title">
     <legend>编辑新闻</legend>

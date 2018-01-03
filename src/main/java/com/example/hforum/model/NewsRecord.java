@@ -1,5 +1,7 @@
 package com.example.hforum.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -8,8 +10,10 @@ public class NewsRecord implements Serializable {
 
     private Long newsId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date forReviewTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date soldoutTime;
 
     private Long soldoutUserId;

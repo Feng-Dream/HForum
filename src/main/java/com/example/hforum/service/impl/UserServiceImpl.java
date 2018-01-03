@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User selectByPrimaryKey(Long userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
     public List<User> list(User user, PageBean pageBean) {
         List<User> list = userMapper.list(user);
         return list;

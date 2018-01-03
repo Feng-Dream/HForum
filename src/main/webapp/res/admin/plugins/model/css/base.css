@@ -18,10 +18,10 @@ body {
 	width:1200px; /*需要修改*/
 	margin: 0 auto;
 }
+
 /*a标签的样式*/
-/*
-a{color:#555;text-decoration:none;} 需要修改
-a:hover{color:#ef8200 !important;} 需要修改 */
+a{color:#555;text-decoration:none;} /*需要修改*/
+a:hover{color: #2577E3 !important;} /*需要修改*/
 
 /*重置标签的一些样式*/
 a{text-decoration:none;}
@@ -48,11 +48,6 @@ img{border:none;}
 .pr{position:relative;}
 .pa{position:absolute;}
 
-/*特殊文字颜色*/
-.red{color:#F12727;}
-.orange{color:#FFC000;}
-.blue{color:#888DBD;}
-.tf-hui{color:#b0b0b0 !important;}
 
 .hidden{display:none;}
 

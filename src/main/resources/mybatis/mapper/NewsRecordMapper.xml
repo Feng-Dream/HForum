@@ -145,4 +145,5 @@
     where news_id = #{newsId,jdbcType=BIGINT}
     ORDER BY aduit_news_version DESC LIMIT 1
   </select>
+
 </mapper>

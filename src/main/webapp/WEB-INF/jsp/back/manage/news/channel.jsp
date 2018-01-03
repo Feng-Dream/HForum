@@ -174,6 +174,7 @@
                 title: ['长按拖拽排序', 'font-size:18px;'],
                 content: 'back/manage/news/edit-channel',
                 success: function (layero, index) {
+
                 }
             });
         });

@@ -18,6 +18,53 @@ public class NewsVo implements Serializable{
 
     private  List<Channel> channels;
 
+    //模糊查询条件
+    private  Integer channelId;
+    private  String newsTitle;
+    private  Integer aduitResult;
+    private  Integer userId;
+    private  String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getAduitResult() {
+        return aduitResult;
+    }
+
+    public void setAduitResult(Integer aduitResult) {
+        this.aduitResult = aduitResult;
+    }
+
+    public String getNewsTitle() {
+        return newsTitle;
+    }
+
+    public void setNewsTitle(String newsTitle) {
+        this.newsTitle = newsTitle;
+    }
+
+    public Integer getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Integer channelId) {
+        this.channelId = channelId;
+    }
+
     public News getNews() {
         return news;
     }

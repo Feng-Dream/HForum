@@ -220,8 +220,32 @@
         where n.news_id =  #{newsId,jdbcType=BIGINT}
     </select>
 
+    <sql id="whereCondition">
+        <if test="channelId != null">
+            and n.news_id in (select nc.nid from news_channel nc where nc.cid =  #{channelId,jdbcType=INTEGER})
+        </if>
+        <!-- 注：CONCAT是mysql数据库中才有的 -->
+        <if test="newsTitle != null and !&quot;&quot;.equals(newsTitle.trim())">
+            and n.news_title like concat('%',trim(#{newsTitle,jdbcType=VARCHAR}),'%')
+        </if>
+        <if test="aduitResult != null">
+            and n.news_id in
+            (SELECT nr.news_id FROM news_record nr
+            INNER JOIN  (SELECT news_id as news_id, MAX(nr.aduit_news_version) as max_version FROM news_record nr GROUP BY nr.news_id) t
+            on nr.news_id = t.news_id
+            AND nr.aduit_news_version = t.max_version
+            AND  nr.aduit_result =  #{aduitResult,jdbcType=INTEGER} )
+        </if>
+        <if test="userId != null">
+            and n.create_user_id =  #{userId,jdbcType=BIGINT}
+        </if>
+    </sql>
+
     <select id="list" parameterType="com.example.hforum.po.NewsVo" resultMap="BaseResultMap">
         select n.* from news n
+        <where>
+            <include refid="whereCondition"></include>
+        </where>
     </select>
 
     <delete id="deleteNewsChannelByNewsId" parameterType="java.lang.Long">

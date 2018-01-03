@@ -13,8 +13,8 @@ public class FilterChainDefinitionMapBuilder {
     public LinkedHashMap<String, String> buildFilterChainDefinitionMap() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("/back/login", "anon");
-       // map.put("/user/logout", "logout");
-        map.put("/back/**", "kickout,authc,roles[后台人员]");
+        map.put("/back/manage/news/channel", "roles[admin]");
+        map.put("/back/**", "kickout,authc,roles[manage]");
         map.put("/u/**", "authc");
         //剩下的都是可以匿名访问的
         map.put("/**", "anon");
