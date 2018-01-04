@@ -34,8 +34,6 @@ public class ChannelController {
     }
 
 
-
-
     @RequestMapping(value = "/list")
     @ResponseBody
     public Map<String, Object> list(Integer page, Integer limit, Boolean paginate, Channel channel) {

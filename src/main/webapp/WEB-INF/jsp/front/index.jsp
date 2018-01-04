@@ -13,12 +13,9 @@
 
 
 <script src="res/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script src="res/js/test.js"></script>
 </head>
 <body style="min-width: 1220px; overflow-x: hidden;">
-<div style="display:none">
-    <input type="hidden" name="csrfmiddlewaretoken" value="78df493449635bbed926a633ea2dcaa5">
-</div>
-<a href="http://www.toutiao.com/articles_news_society/" style="display:none;"></a>
 <div class="y-wrap">
     <!-- 公共头部 position: fixed;-->
     <div id="header" style="position: fixed;z-index: 1000;">
@@ -45,7 +42,7 @@
                                 </div>
                                 <span class="temperature"><em>20</em>° / <em>26</em>° </span></li>
                             </ul>
-                            <div class="y-box city-select ">
+                            <div class="y-box city-select">
                                 <div class="y-box">
                                     <div class="y-left select-style">
                                         <p class="y-box">
@@ -74,16 +71,16 @@
                 </ul>
                 <ul class="y-right">
                 <li class="tb-item"><a class="tb-link" href="javascript:void(0)">首页</a></li>
-                   <li class="tb-item"><a class="tb-link" href="http://app.toutiao.com/news_article/" target="_blank" ga_event="mh_nav_others">下载APP</a></li>
-                   <li class="tb-item zoomIn dialog"><a class="tb-link" href="javascript:void(0)">登录</a></li>
-                   <li class="tb-item"><a class="tb-link" href="javascript:void(0)">注册</a></li>
+                    <li class="tb-item"><a class="tb-link" href="/" target="_blank">下载APP</a></li>
+                    <li class="tb-item zoomIn dialog"><a class="tb-link" href="javascript:void(0)">登录</a></li>
+                    <li class="tb-item"><a class="tb-link" href="javascript:void(0)">注册</a></li>
                     <li class="tb-item"><a class="tb-link" href="javascript:void(0)">反馈</a></li>
-                    <li class="tb-item more"><a class="tb-link" href="http://www.toutiao.com/about/">更多产品</a>
+                    <li class="tb-item more"><a class="tb-link" href="/about/">更多产品</a>
                     <div class="layer">
                         <ul>
-                            <li><a href="https://wenda.toutiao.com/" class="layer-item" ga_event="mh_nav_others" target="_blank">问答</a></li>
-                            <li><a href="https://mp.toutiao.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">头条号</a></li>
-                            <li><a href="https://tuchong.com/" class="layer-item" target="_blank" ga_event="mh_nav_others">图虫</a></li>
+                            <li><a href="/" class="layer-item" target="_blank">HForum社区</a></li>
+                            <li><a href="/" class="layer-item" target="_blank" >暂未开发</a></li>
+                            <li><a href="/" class="layer-item" target="_blank">暂未开发</a></li>
                         </ul>
                     </div>
                     </li>
@@ -101,40 +98,7 @@
         <div class="y-left index-channel"  style="margin-top:50px;">
             <div riot-tag="wchannel" style="position: fixed;z-index: 1">
                 <div ga_event="left-channel-click" class="wchannel" >                
-                    <a class="logo" href="http://www.toutiao.com/"><img src="res/images/logo.png" alt=""><i style="font-size: 20px;color: #2577E3;padding-left:8px;">HForum</i></a>
-                   <ul>
-                        <li onclick=""><a class="wchannel-item active" href="http://www.toutiao.com/" target="" ga_event="channel_refreh"><span>推荐</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_hot/" target="" ga_event=""><span>热点</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/video/" target="" ga_event=""><span>视频</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_image/" target="_blank" ga_event=""><span>图片</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_society/" target="" ga_event=""><span>社会</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_entertainment/" target="" ga_event=""><span>娱乐</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_tech/" target="" ga_event=""><span>科技</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_sports/" target="" ga_event=""><span>体育</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_car/" target="" ga_event=""><span>汽车</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/news_finance/" target="" ga_event=""><span>财经</span></a></li>
-                        <li onclick=""><a class="wchannel-item " href="http://www.toutiao.com/ch/funny/" target="" ga_event=""><span>搞笑</span></a></li>
-                        <!--riot placeholder-->
-                        <li class="wchannel-more"><a href="javascript:;" class="wchannel-item"><span>更多</span></a>
-                        <div class="wchannel-more-layer">
-                            <ul>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_military/" target=""><span>军事</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_world/" target=""><span>国际</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_fashion/" target=""><span>时尚</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_travel/" target=""><span>旅游</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_discovery/" target=""><span>探索</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_baby/" target=""><span>育儿</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_regimen/" target=""><span>养生</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_story/" target=""><span>故事</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_essay/" target=""><span>美文</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_game/" target=""><span>游戏</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_history/" target=""><span>历史</span></a></li>
-                                <li><a class="y-left wchannel-item" href="http://www.toutiao.com/ch/news_food/" target=""><span>美食</span></a></li>
-                                <!--riot placeholder-->
-                            </ul>
-                        </div>
-                        </li>
-                    </ul>
+                    <a class="logo" href="/"><img src="res/images/logo.png" title="HForum"><i style="font-size: 20px;color: #2577E3;padding-left:8px;">HForum</i></a>
                 </div>
             </div>
         </div>

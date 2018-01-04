@@ -11,14 +11,12 @@ import java.util.List;
 
 /**
  * aop环绕通知，在*Biz.list*()方法前后执行，与mybatis的PageHelper插件一起完成PageBean的初始化
- *
- * @author Administrator
  */
 @Component
 @Aspect
 public class PageBeanAspect {
 
-    @Around(value = "execution(* *..*Service.list*(..))")
+    @Around(value = "execution(* com.example.hforum.service.*Service.list*(..))")
     public Object invoke(ProceedingJoinPoint joinPoint) throws Throwable {
         // 取出PageBean
         Object[] args = joinPoint.getArgs();

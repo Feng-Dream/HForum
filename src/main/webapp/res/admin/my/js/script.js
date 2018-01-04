@@ -219,7 +219,7 @@ window.onload = function () {
         data: d,
 
         success: function (result) {
-            for (i = 0; i < result.data.length; i++) {
+            for (var i = 0; i < result.data.length; i++) {
                 if (result.data[i].selected) {
                     aData1[aData1.length] = result.data[i];
                 }
