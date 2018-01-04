@@ -9,11 +9,7 @@
 
 <link type="text/css" rel="stylesheet" href="res/css/slides-playing/base.css">
 <link type="text/css" rel="stylesheet" href="res/css/slides-playing/index.css">
-
-
-
 <script src="res/js/jquery.SuperSlide.2.1.1.js"></script>
-    <script src="res/js/test.js"></script>
 </head>
 <body style="min-width: 1220px; overflow-x: hidden;">
 <div class="y-wrap">
@@ -1416,7 +1412,21 @@
     </div>
 </div>
 <div id="HBox"></div>
-		<script src="res/js/dialog/jquery.hDialog.min.js"></script>
-		<script type="text/javascript" src="res/js/home.js"></script>		
+<div id="allmap"></div>
+<script src="res/js/dialog/jquery.hDialog.min.js"></script>
+<script type="text/javascript" src="res/js/home.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YOQ09qHZyofYDfxiFGpPbGcazubpf2ct"></script>
+<script type="text/javascript">
+
+    // 百度地图API功能
+    var map = new BMap.Map("allmap"); //初始化地图类
+    function myFun(result){
+        var cityName = result.name;
+        map.setCenter(cityName);
+        alert("当前定位城市:"+cityName);
+    }
+    var myCity = new BMap.LocalCity();
+    myCity.get(myFun);
+</script>
 </body>
 </html>

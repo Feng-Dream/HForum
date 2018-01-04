@@ -10,7 +10,9 @@
 %>
 
 <base href="<%=basePath%>">
-
+<%--使页面更好的在移动平台上展示--%>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
